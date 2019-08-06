@@ -1,0 +1,6 @@
+output: docs
+sdk: iphonesimulator
+author: Levi Bostian
+author_url: https://github.com/levibostian/
+podspec: Swapper.podspec
+github_url: https://github.com/levibostian/Swapper-iOS

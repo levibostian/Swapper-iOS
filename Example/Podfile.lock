@@ -1,0 +1,16 @@
+PODS:
+  - Swapper (0.1.0)
+
+DEPENDENCIES:
+  - Swapper (from `../`)
+
+EXTERNAL SOURCES:
+  Swapper:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Swapper: 11c33c0048d2c92226e93adaac80002b17fe4624
+
+PODFILE CHECKSUM: 0a920a2238b7a8993e4d4ae6b4212173a8c43c5e
+
+COCOAPODS: 1.7.5
