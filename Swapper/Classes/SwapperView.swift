@@ -15,12 +15,20 @@ public typealias SwappableView = UIView
 public class SwapperView: UIView {
 
     /// Access to `SwapperViewConfig` to set defaults on all instances of `SwapperView`.
-    public var defaultConfig: SwapperViewConfig = SwapperViewConfig.shared
-    /// Override `defaultConfig`
-    public var config: SwapperViewConfig? = nil
+    public static let defaultConfig: SwapperViewConfig = SwapperViewConfig.shared
+    /// Override `defaultConfig` for this once instance.
+    public var config: SwapperViewConfig? = nil {
+        didSet {
+            configView()
+        }
+    }
 
     private var _config: SwapperViewConfig {
-        return config ?? defaultConfig
+        return config ?? SwapperView.defaultConfig
+    }
+
+    convenience init() {
+        self.init(frame: CGRect.zero)
     }
 
     /// Override the animation for old view that is getting swapped out.
@@ -35,13 +43,19 @@ public class SwapperView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        self.backgroundColor = self._config.backgroundColor
+        configView()
 
         self.setNeedsUpdateConstraints()
     }
 
+    private func configView() {
+        self.backgroundColor = self._config.backgroundColor
+    }
+
     /// Remove all of the previous swapping views and set new ones. The first view in the list will be shown after this function called.
     public func setSwappingViews(_ newSwappingViews: [(String, SwappableView)]) {
+        self.removeAllSubviews() // Since we are changing the views, it's ok if we instantly change up what screen is shown. No need for animation.
+        self.currentView = nil
         self.swappingViews = [:]
 
         newSwappingViews.forEach { (newSwappingViewPair) in
@@ -53,8 +67,6 @@ public class SwapperView: UIView {
         if !newSwappingViews.isEmpty {
             // force_try ok here since I am setting the swappingViews.
             try! self.swapTo(newSwappingViews[0].0)
-        } else {
-            self.removeAllSubviews()
         }
     }
 

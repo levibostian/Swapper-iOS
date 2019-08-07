@@ -43,12 +43,26 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
-            skipped = "NO">
+            skipped = "NO"
+            parallelizable = "YES"
+            testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "607FACE41AFB9204008FA782"
                BuildableName = "Swapper_Tests.xctest"
                BlueprintName = "Swapper_Tests"
+               ReferencedContainer = "container:Swapper.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES"
+            testExecutionOrdering = "random">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F7D1E02A22FA22050034DFE8"
+               BuildableName = "Swapper_ExampleUITests.xctest"
+               BlueprintName = "Swapper_ExampleUITests"
                ReferencedContainer = "container:Swapper.xcodeproj">
             </BuildableReference>
          </TestableReference>

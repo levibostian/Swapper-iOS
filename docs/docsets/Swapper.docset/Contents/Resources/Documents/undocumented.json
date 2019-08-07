@@ -1,6 +1,12 @@
 {
   "warnings": [
-
+    {
+      "file": "/Users/levibostian/code/Swapper/Swapper/Classes/SwapperViewConfig.swift",
+      "line": 20,
+      "symbol": "SwapperViewConfig.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
   ],
   "source_directory": "/Users/levibostian/code/Swapper"
 }

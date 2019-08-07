@@ -21,6 +21,7 @@ class ViewController: UIViewController {
     let swapperView: SwapperView = {
         let view = SwapperView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.accessibilityIdentifier = AccessibilityIdentifiers.swapperView
         return view
     }()
 
@@ -29,6 +30,7 @@ class ViewController: UIViewController {
         view.image = #imageLiteral(resourceName: "mt_mckinley")
         view.contentMode = .scaleAspectFit
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.accessibilityIdentifier = AccessibilityIdentifiers.mcKinleyImage
         return view
     }()
 
@@ -37,6 +39,7 @@ class ViewController: UIViewController {
         view.image = #imageLiteral(resourceName: "little_hill")
         view.contentMode = .scaleAspectFit
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.accessibilityIdentifier = AccessibilityIdentifiers.littleHillImage
         return view
     }()
 
@@ -45,6 +48,7 @@ class ViewController: UIViewController {
         view.setTitle("Swap!", for: .normal)
         view.setTitleColor(.blue, for: .normal)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.accessibilityIdentifier = AccessibilityIdentifiers.swapButton
         return view
     }()
 
@@ -60,7 +64,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
 
         self.view.backgroundColor = .white
 
@@ -84,12 +87,11 @@ class ViewController: UIViewController {
     @objc func swapButtonPressed() {
         var nextSwap: ViewControllerSwapViews
 
-        switch self.swapperView.currentView!.0 {
-        case ViewControllerSwapViews.mtMcKinley.rawValue:
-            nextSwap = ViewControllerSwapViews.littleHill
-        case ViewControllerSwapViews.littleHill.rawValue:
-            nextSwap = ViewControllerSwapViews.mtMcKinley
-        default: fatalError("missing case")
+        switch ViewControllerSwapViews(rawValue: self.swapperView.currentView!.0)! {
+        case .mtMcKinley:
+            nextSwap = .littleHill
+        case .littleHill:
+            nextSwap = .mtMcKinley
         }
 
         try! self.swapperView.swapTo(nextSwap.rawValue)
@@ -100,10 +102,6 @@ class ViewController: UIViewController {
             swapperView.heightAnchor.constraint(equalToConstant: 200).isActive = true
             swapperView.widthAnchor.constraint(equalToConstant: 200).isActive = true
 
-//            rootView.leftAnchor.constraint(equalTo: self.view.layoutMarginsGuide.leftAnchor).isActive = true
-//            rootView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor).isActive = true
-//            rootView.rightAnchor.constraint(equalTo: self.view.layoutMarginsGuide.rightAnchor).isActive = true
-//            rootView.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor).isActive = true
             rootView.centerYAnchor.constraint(equalTo: self.view.layoutMarginsGuide.centerYAnchor).isActive = true
             rootView.centerXAnchor.constraint(equalTo: self.view.layoutMarginsGuide.centerXAnchor).isActive = true
 
