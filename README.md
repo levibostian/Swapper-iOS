@@ -8,6 +8,8 @@
 
 Swap between many different UIViews within your app quick and easy.
 
+![project logo](misc/header.jpg)
+
 ## What is Swapper?
 
 You know those moments in your app when you have a `UITableView` that has no rows to show? You know those moments when you perform a HTTP network request and you want to show a non-blocking loading view to the user? These are very common scenarios for mobile apps. Swapper is a `UIView` that allows you to swap between a set of other `UIView`s with just 1 line of code. 
@@ -73,7 +75,7 @@ class ViewController: UIViewController {
 
 Swapper is designed to automatically show the first `UIView` of the list given when you set the views. 
 
-*Note:* Swapper will update the autolayout constraints of the `UIView`s you set as the swapping views. Swapper will set the size as the same size you set as the `SwapperView`. Therefore, no need to set autolayout constraints on your own! 
+*Note:* Swapper will update the AutoLayout constraints of the `UIView`s you set as the swapping views. Swapper will set the size as the same size you set as the `SwapperView`. Therefore, no need to set AutoLayout constraints on your own! If you're not using AutoLayout, edit the configuration for `SwapperView` to not update the constraints: `SwapperView.defaultConfig.updateAutoLayoutConstraints = false`.
 
 * Lastly, all you need to do is to tell Swapper to swap!
 
@@ -84,8 +86,11 @@ try! swapperView.swapTo(ViewControllerSwapViews.tableView.rawValue)
 Swapper will now show the `UITableView` for you. Swapper will even fade out the `UIImageView` and fade in the `UITbleView` for you for a nice touch 👌. If you want to override the default animation, you can override the behavior yourself:
 
 ```swift
-swapperView.swapToAnimateOldView = { oldView in
-    // Run `UIView.animate()` function here on `oldView` to animate it. 
+SwapperView.defaultConfig.swapToAnimateOldView = { oldView in
+    // Run `UIView.animate()` function here on `oldView` to animate it out. 
+}
+SwapperView.defaultConfig.swapToAnimateNewView = { newView in
+    // Run `UIView.animate()` function here on `newView` to animate it in. 
 }
 ```
 

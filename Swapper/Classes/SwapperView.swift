@@ -23,16 +23,6 @@ public class SwapperView: UIView {
         self.init(frame: CGRect.zero)
     }
 
-    /// Override the animation for old view that is getting swapped out.
-    public var swapToAnimateOldView: (_ oldView: UIView) -> Void = { oldView in
-        oldView.alpha = 0
-    }
-
-    /// Override the animation for new view that is getting swapped in.
-    public var swapToAnimateNewView: (_ newView: UIView) -> Void = { newView in
-        newView.alpha = 1
-    }
-
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -59,7 +49,8 @@ public class SwapperView: UIView {
 
         if !newSwappingViews.isEmpty {
             // force_try ok here since I am setting the swappingViews.
-            try! swapTo(newSwappingViews[0].0)
+            // Ok to put `nil` in for onComplete because this will be the first view that we add (since we removed all other subviews), this function call will be synchronous.
+            try! swapTo(newSwappingViews[0].0, onComplete: nil)
         }
     }
 
@@ -75,7 +66,7 @@ public class SwapperView: UIView {
     /// - Parameter viewIndicator: View from `self.swappingViews` to swap to.
     /// - Parameter onComplete: Optional parameter to tell you when the swap animation is complete and the new view is shown.
     /// - Throws: `SwapperError.viewToSwapToDoesNotExist` If the `viewIndicator` is not found in `self.swappingViews`.
-    public func swapTo(_ viewIndicator: String, onComplete: (() -> Void)? = nil) throws {
+    public func swapTo(_ viewIndicator: String, onComplete: (() -> Void)?) throws {
         guard let viewToSwapTo = self.swappingViews[viewIndicator] else {
             throw SwapperError.viewToSwapToDoesNotExist(viewIndicator: viewIndicator)
         }
@@ -83,8 +74,13 @@ public class SwapperView: UIView {
         let isFirstViewToShow = subviews.isEmpty
 
         func setupConstraints(on view: UIView) {
+            guard _config.updateAutoLayoutConstraints else {
+                return
+            }
+
             let superviewMargins = layoutMarginsGuide
 
+            view.translatesAutoresizingMaskIntoConstraints = false
             view.leadingAnchor.constraint(equalTo: superviewMargins.leadingAnchor).isActive = true
             view.topAnchor.constraint(equalTo: superviewMargins.topAnchor).isActive = true
             view.trailingAnchor.constraint(equalTo: superviewMargins.trailingAnchor).isActive = true
@@ -100,14 +96,14 @@ public class SwapperView: UIView {
             let oldView = subviews[0]
 
             UIView.animate(withDuration: _config.transitionAnimationDuration, animations: {
-                self.swapToAnimateOldView(oldView)
+                self._config.swapToAnimateOldView(oldView)
             }, completion: { _ in
                 self.removeAllSubviews()
                 self.addSubview(viewToSwapTo)
                 setupConstraints(on: viewToSwapTo)
 
                 UIView.animate(withDuration: self._config.transitionAnimationDuration / 2, animations: {
-                    self.swapToAnimateNewView(viewToSwapTo)
+                    self._config.swapToAnimateNewView(viewToSwapTo)
                 }, completion: { _ in
                     self.currentView = (viewIndicator, viewToSwapTo)
 

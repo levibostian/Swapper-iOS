@@ -130,60 +130,6 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7Swapper0A4ViewC016swapToAnimateOldB0yySo6UIViewCcvp"></a>
-                    <a name="//apple_ref/swift/Property/swapToAnimateOldView" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Swapper0A4ViewC016swapToAnimateOldB0yySo6UIViewCcvp">swapToAnimateOldView</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Override the animation for old view that is getting swapped out.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">swapToAnimateOldView</span><span class="p">:</span> <span class="p">(</span><span class="kt">UIView</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7Swapper0A4ViewC016swapToAnimateNewB0yySo6UIViewCcvp"></a>
-                    <a name="//apple_ref/swift/Property/swapToAnimateNewView" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7Swapper0A4ViewC016swapToAnimateNewB0yySo6UIViewCcvp">swapToAnimateNewView</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Override the animation for new view that is getting swapped in.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">swapToAnimateNewView</span><span class="p">:</span> <span class="p">(</span><span class="kt">UIView</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:7Swapper0A4ViewC16setSwappingViewsyySaySS_So6UIViewCtGF"></a>
                     <a name="//apple_ref/swift/Method/setSwappingViews(_:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:7Swapper0A4ViewC16setSwappingViewsyySaySS_So6UIViewCtGF">setSwappingViews(_:)</a>
@@ -228,7 +174,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">private(set)</span> <span class="kd">public</span> <span class="k">var</span> <span class="nv">currentView</span><span class="p">:</span> <span class="p">(</span><span class="kt">String</span><span class="p">,</span> <span class="kt"><a href="../Typealiases.html#/s:7Swapper13SwappableViewa">SwappableView</a></span><span class="p">)?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">currentView</span><span class="p">:</span> <span class="p">(</span><span class="kt">String</span><span class="p">,</span> <span class="kt"><a href="../Typealiases.html#/s:7Swapper13SwappableViewa">SwappableView</a></span><span class="p">)?</span></code></pre>
 
                         </div>
                       </div>
@@ -260,7 +206,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">private(set)</span> <span class="kd">public</span> <span class="k">var</span> <span class="nv">swappingViews</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:7Swapper13SwappableViewa">SwappableView</a></span><span class="p">]</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">swappingViews</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:7Swapper13SwappableViewa">SwappableView</a></span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -292,7 +238,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">swapTo</span><span class="p">(</span><span class="n">_</span> <span class="nv">viewIndicator</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">onComplete</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">swapTo</span><span class="p">(</span><span class="n">_</span> <span class="nv">viewIndicator</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">onComplete</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -335,7 +281,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://github.com/levibostian/" target="_blank" rel="external">Levi Bostian</a>. All rights reserved. (Last updated: 2019-08-06)</p>
+          <p>&copy; 2019 <a class="link" href="https://github.com/levibostian/" target="_blank" rel="external">Levi Bostian</a>. All rights reserved. (Last updated: 2019-08-08)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.10.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -22,7 +22,7 @@ jobs:
   - stage: tests
     script: ruby scripts/run_unit_tests.rb
   - stage: pull-request
-    script: ruby scripts/pull-request.rb
+    script: ruby scripts/pull_request.rb
   - stage: deploy
     script: ruby scripts/deploy.rb
 

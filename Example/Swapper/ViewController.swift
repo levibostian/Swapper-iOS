@@ -20,7 +20,6 @@ class ViewController: UIViewController {
         let view = UIImageView()
         view.image = #imageLiteral(resourceName: "mt_mckinley")
         view.contentMode = .scaleAspectFit
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.accessibilityIdentifier = AccessibilityIdentifiers.mcKinleyImage
         return view
     }()
@@ -29,7 +28,6 @@ class ViewController: UIViewController {
         let view = UIImageView()
         view.image = #imageLiteral(resourceName: "little_hill")
         view.contentMode = .scaleAspectFit
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.accessibilityIdentifier = AccessibilityIdentifiers.littleHillImage
         return view
     }()
@@ -86,7 +84,7 @@ class ViewController: UIViewController {
             nextSwap = .mtMcKinley
         }
 
-        try! swapperView.swapTo(nextSwap.rawValue)
+        try! swapperView.swapTo(nextSwap.rawValue, onComplete: nil)
     }
 
     override func updateViewConstraints() {
