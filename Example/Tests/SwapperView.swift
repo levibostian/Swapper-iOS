@@ -48,7 +48,7 @@ class SwapperViewTests: XCTestCase {
 
         swapperView.setSwappingViews(swappingViews)
 
-        try! swapperView.swapTo(swappingViews[1].0)
+        try! swapperView.swapTo(swappingViews[1].0, onComplete: nil)
 
         wait(for: [expectAnimatorToBeCalled], timeout: TestConfig.defaultWait)
     }
@@ -66,7 +66,7 @@ class SwapperViewTests: XCTestCase {
 
         swapperView.setSwappingViews(swappingViews)
 
-        try! swapperView.swapTo(swappingViews[1].0)
+        try! swapperView.swapTo(swappingViews[1].0, onComplete: nil)
 
         wait(for: [expectAnimatorToBeCalled], timeout: TestConfig.defaultWait)
     }
@@ -114,14 +114,14 @@ class SwapperViewTests: XCTestCase {
         ]
 
         swapperView.setSwappingViews(swappingViews)
-        try! swapperView.swapTo(swappingViews[1].0) {
-            self.swapperView.setSwappingViews(newSetSwappingViews)
+            try! swapperView.swapTo(swappingViews[1].0) {
+                self.swapperView.setSwappingViews(newSetSwappingViews)
 
-            XCTAssertEqual(self.swapperView.currentView!.0, newSetSwappingViews[0].0)
-            XCTAssertEqual(self.swapperView.subviews[0], newSetSwappingViews[0].1)
+                XCTAssertEqual(self.swapperView.currentView!.0, newSetSwappingViews[0].0)
+                XCTAssertEqual(self.swapperView.subviews[0], newSetSwappingViews[0].1)
 
-            expectatation.fulfill()
-        }
+                expectatation.fulfill()
+            }
 
         wait(for: [expectatation], timeout: TestConfig.defaultWait)
     }
@@ -140,6 +140,6 @@ class SwapperViewTests: XCTestCase {
     }
 
     func test_swapTo_throwsIfIdNotFound() {
-        XCTAssertThrowsError(try swapperView.swapTo("not-found"))
+        XCTAssertThrowsError(try swapperView.swapTo("not-found", onComplete: nil))
     }
 }
