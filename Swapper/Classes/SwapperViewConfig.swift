@@ -1,15 +1,7 @@
-//
-//  SwapperViewDefaults.swift
-//  Pods
-//
-//  Created by Levi Bostian on 8/6/19.
-//
-
 import Foundation
 
 /// Configuration for `SwapperView`
 public class SwapperViewConfig {
-
     /// Singleton access to `SwapperViewConfig`.
     public static var shared: SwapperViewConfig = SwapperViewConfig()
 
@@ -17,10 +9,8 @@ public class SwapperViewConfig {
     public var backgroundColor: UIColor = .white
 
     /// Create instance of `SwapperViewConfig`
-    public init() {
-    }
+    public init() {}
 
     /// The animation duration for swapping from an old view to the new view.
     public var transitionAnimationDuration: Double = 0.3
-
 }

@@ -1,13 +1,5 @@
-//
-//  Swapper_ExampleUITests.swift
-//  Swapper_ExampleUITests
-//
-//  Created by Levi Bostian on 8/6/19.
-//  Copyright © 2019 CocoaPods. All rights reserved.
-//
-
-import XCTest
 @testable import Pods_Swapper_Example
+import XCTest
 
 class ViewControllerTests: XCTestCase {
     var app: XCUIApplication!
@@ -22,8 +14,7 @@ class ViewControllerTests: XCTestCase {
         viewController = ViewControllerPageObject(app: app)
     }
 
-    override func tearDown() {
-    }
+    override func tearDown() {}
 
     func test_coldStartSwapperViewShowingCorrectViews() {
         app.launch()
@@ -51,12 +42,15 @@ class ViewControllerPageObject {
     var swapperView: XCUIElement {
         return app.otherElements[AccessibilityIdentifiers.swapperView]
     }
+
     var swapButton: XCUIElement {
         return app.buttons[AccessibilityIdentifiers.swapButton]
     }
+
     var mcKinleyImage: XCUIElement! {
         return app.images[AccessibilityIdentifiers.mcKinleyImage]
     }
+
     var littleHillImage: XCUIElement! {
         return app.images[AccessibilityIdentifiers.littleHillImage]
     }

@@ -1,10 +1,3 @@
-//
-//  SwapperError.swift
-//  Pods
-//
-//  Created by Levi Bostian on 8/6/19.
-//
-
 import Foundation
 
 /// Errors thrown by Swapper.

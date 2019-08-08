@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Swapper'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of Swapper.'
+  s.version          = '0.0.1'
+  s.summary          = 'UIView that can swap between child views you provide.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,17 +18,16 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
-                       DESC
+  You know those moments in your app when you have a `UITableView` that has no rows to show? You know those moments when you perform a HTTP network request and you want to show a non-blocking loading view to the user? These are very common scenarios for mobile apps. Swapper is a `UIView` that allows you to swap between a set of other `UIView`s with just 1 line of code. 
+                         DESC
 
-  s.homepage         = 'https://github.com/levibostian/Swapper'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.homepage         = 'https://github.com/levibostian/Swapper-iOS'  
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Levi Bostian' => 'levi@curiosityio.com' }
-  s.source           = { :git => 'https://github.com/levibostian/Swapper-iOS.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.source           = { :git => 'https://github.com/levibostian/Swapper-iOS.git', :tag => s.version.to_s }  
 
   s.ios.deployment_target = '9.3'
+  s.swift_versions = "5.0"
 
   s.source_files = 'Swapper/Classes/**/*'
   

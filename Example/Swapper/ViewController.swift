@@ -1,13 +1,5 @@
-//
-//  ViewController.swift
-//  Swapper
-//
-//  Created by Levi Bostian on 08/06/2019.
-//  Copyright (c) 2019 Levi Bostian. All rights reserved.
-//
-
-import UIKit
 import Swapper
+import UIKit
 
 enum ViewControllerSwapViews: String {
     case mtMcKinley
@@ -15,7 +7,6 @@ enum ViewControllerSwapViews: String {
 }
 
 class ViewController: UIViewController {
-
     private var didSetupConstraints = false
 
     let swapperView: SwapperView = {
@@ -65,36 +56,37 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = .white
+        view.backgroundColor = .white
 
         rootView.addArrangedSubview(swapperView)
         rootView.addArrangedSubview(swapButton)
-        self.view.addSubview(rootView)
+        view.addSubview(rootView)
 
         view.setNeedsUpdateConstraints()
 
-        self.setupViews()
+        setupViews()
     }
 
     private func setupViews() {
-        self.swapperView.setSwappingViews([
+        swapperView.setSwappingViews([
             (ViewControllerSwapViews.mtMcKinley.rawValue, mtMcKinleyImageView),
-            (ViewControllerSwapViews.littleHill.rawValue, littleHillImageView)])
+            (ViewControllerSwapViews.littleHill.rawValue, littleHillImageView)
+        ])
 
-        self.swapButton.addTarget(self, action: #selector(swapButtonPressed), for: .touchUpInside)
+        swapButton.addTarget(self, action: #selector(swapButtonPressed), for: .touchUpInside)
     }
 
     @objc func swapButtonPressed() {
         var nextSwap: ViewControllerSwapViews
 
-        switch ViewControllerSwapViews(rawValue: self.swapperView.currentView!.0)! {
+        switch ViewControllerSwapViews(rawValue: swapperView.currentView!.0)! {
         case .mtMcKinley:
             nextSwap = .littleHill
         case .littleHill:
             nextSwap = .mtMcKinley
         }
 
-        try! self.swapperView.swapTo(nextSwap.rawValue)
+        try! swapperView.swapTo(nextSwap.rawValue)
     }
 
     override func updateViewConstraints() {
@@ -102,13 +94,12 @@ class ViewController: UIViewController {
             swapperView.heightAnchor.constraint(equalToConstant: 200).isActive = true
             swapperView.widthAnchor.constraint(equalToConstant: 200).isActive = true
 
-            rootView.centerYAnchor.constraint(equalTo: self.view.layoutMarginsGuide.centerYAnchor).isActive = true
-            rootView.centerXAnchor.constraint(equalTo: self.view.layoutMarginsGuide.centerXAnchor).isActive = true
+            rootView.centerYAnchor.constraint(equalTo: view.layoutMarginsGuide.centerYAnchor).isActive = true
+            rootView.centerXAnchor.constraint(equalTo: view.layoutMarginsGuide.centerXAnchor).isActive = true
 
             didSetupConstraints = true
         }
 
         super.updateViewConstraints()
     }
-
 }
