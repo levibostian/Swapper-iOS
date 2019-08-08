@@ -60,25 +60,152 @@
         <section>
           <section class="section">
             
-            <h1 id='swapper' class='heading'>Swapper</h1>
-
-<p><a href="https://travis-ci.org/Levi%20Bostian/Swapper"><img src="https://img.shields.io/travis/Levi%20Bostian/Swapper.svg?style=flat" alt="CI Status"></a>
+            <p><a href="https://travis-ci.com/levibostian/Swapper-iOS"><img src="https://travis-ci.com/levibostian/Swapper-iOS.svg?branch=master" alt="Build Status"></a>
 <a href="https://cocoapods.org/pods/Swapper"><img src="https://img.shields.io/cocoapods/v/Swapper.svg?style=flat" alt="Version"></a>
 <a href="https://cocoapods.org/pods/Swapper"><img src="https://img.shields.io/cocoapods/l/Swapper.svg?style=flat" alt="License"></a>
-<a href="https://cocoapods.org/pods/Swapper"><img src="https://img.shields.io/cocoapods/p/Swapper.svg?style=flat" alt="Platform"></a></p>
-<h2 id='example' class='heading'>Example</h2>
+<a href="https://cocoapods.org/pods/Swapper"><img src="https://img.shields.io/cocoapods/p/Swapper.svg?style=flat" alt="Platform"></a>
+<img src="https://img.shields.io/badge/Swift-5.0.x-orange.svg" alt="Swift 5.0.x"></p>
+<h1 id='swapper' class='heading'>Swapper</h1>
 
-<p>To run the example project, clone the repo, and run <code>pod install</code> from the Example directory first.</p>
-<h2 id='requirements' class='heading'>Requirements</h2>
+<p>Swap between many different UIViews within your app quick and easy.</p>
+
+<p><img src="misc/header.jpg" alt="project logo"></p>
+<h2 id='what-is-swapper' class='heading'>What is Swapper?</h2>
+
+<p>You know those moments in your app when you have a <code>UITableView</code> that has no rows to show? You know those moments when you perform a HTTP network request and you want to show a non-blocking loading view to the user? These are very common scenarios for mobile apps. Swapper is a <code>UIView</code> that allows you to swap between a set of other <code>UIView</code>s with just 1 line of code. </p>
+<h2 id='why-use-swapper' class='heading'>Why use Swapper?</h2>
+
+<ul>
+<li>Swift API</li>
+<li>Lightweight. Zero dependencies.</li>
+<li>UI testing friendly.</li>
+<li>Setup with default values that should work for 95% of your use cases. Customizable for those other cases.</li>
+<li>Full test suite. <a href="https://travis-ci.com/levibostian/Swapper-iOS"><img src="https://travis-ci.com/levibostian/Swapper-iOS.svg?branch=master" alt="Build Status"></a></li>
+<li><a href="http://cocoadocs.org/docsets/Swapper">Full documentation</a>.</li>
+</ul>
 <h2 id='installation' class='heading'>Installation</h2>
 
-<p>Swapper is available through <a href="https://cocoapods.org">CocoaPods</a>. To install
-it, simply add the following line to your Podfile:</p>
-<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'Swapper'</span>
+<p>Swapper is available through <a href="https://cocoapods.org/pods/Swapper">CocoaPods</a>. To install it, simply add the following line to your Podfile:</p>
+<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'Swapper'</span><span class="p">,</span> <span class="s1">'~&gt; version-here'</span>
+</code></pre>
+
+<p>Replace <code>version-here</code> with: <a href="https://cocoapods.org/pods/Swapper"><img src="https://img.shields.io/cocoapods/v/Swapper.svg?style=flat" alt="Version"></a> as this is the latest version at this time. </p>
+<h1 id='getting-started' class='heading'>Getting started</h1>
+
+<ul>
+<li>Create an instance of <code><a href="Classes/SwapperView.html">SwapperView</a></code> in your <code>UIViewController</code>. You can do this with Storyboard by adding a <code>UIView</code> to Storyboard and setting the <code>UIView</code> class to <code><a href="Classes/SwapperView.html">SwapperView</a></code>, or create an instance in your Swift code:</li>
+</ul>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">swapperView</span><span class="p">:</span> <span class="kt">SwapperView</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">view</span> <span class="o">=</span> <span class="kt">SwapperView</span><span class="p">()</span>
+    <span class="n">view</span><span class="o">.</span><span class="n">translatesAutoresizingMaskIntoConstraints</span> <span class="o">=</span> <span class="kc">false</span>
+    <span class="n">view</span><span class="o">.</span><span class="n">backgroundColor</span> <span class="o">=</span> <span class="o">.</span><span class="n">white</span>
+    <span class="k">return</span> <span class="n">view</span>
+<span class="p">}()</span>
+</code></pre>
+
+<ul>
+<li>Make sure to create the <code>UIView</code>s that you want to swap between. In this example, let&rsquo;s assume that I created a <code>UITableView</code> and a <code>UIImageView</code> that I want to swap between.</li>
+</ul>
+
+<p>In your <code>UIViewController</code>, add your <code>UIView</code>s to your <code><a href="Classes/SwapperView.html">SwapperView</a></code>:</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">Swapper</span>
+
+<span class="c1">// It's recommended to use emum over strings. It will prevent bugs by not worrying about typos. </span>
+<span class="kd">enum</span> <span class="kt">ViewControllerSwapViews</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">imageView</span>
+    <span class="k">case</span> <span class="n">tableView</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="kt">ViewController</span><span class="p">:</span> <span class="kt">UIViewController</span> <span class="p">{</span>
+
+    <span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">super</span><span class="o">.</span><span class="nf">viewDidLoad</span><span class="p">()</span>
+
+        <span class="n">swapperView</span><span class="o">.</span><span class="nf">setSwappingViews</span><span class="p">([</span>
+            <span class="p">(</span><span class="kt">ViewControllerSwapViews</span><span class="o">.</span><span class="n">imageView</span><span class="o">.</span><span class="n">rawValue</span><span class="p">,</span> <span class="n">myImageView</span><span class="p">),</span>
+            <span class="p">(</span><span class="kt">ViewControllerSwapViews</span><span class="o">.</span><span class="n">tableView</span><span class="o">.</span><span class="n">rawValue</span><span class="p">,</span> <span class="n">myTableView</span><span class="p">)</span>
+        <span class="p">])</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre>
+
+<p>Swapper is designed to automatically show the first <code>UIView</code> of the list given when you set the views. </p>
+
+<p><em>Note:</em> Swapper will update the AutoLayout constraints of the <code>UIView</code>s you set as the swapping views. Swapper will set the size as the same size you set as the <code><a href="Classes/SwapperView.html">SwapperView</a></code>. Therefore, no need to set AutoLayout constraints on your own! If you&rsquo;re not using AutoLayout, edit the configuration for <code><a href="Classes/SwapperView.html">SwapperView</a></code> to not update the constraints: <code>SwapperView.defaultConfig.updateAutoLayoutConstraints = false</code>.</p>
+
+<ul>
+<li>Lastly, all you need to do is to tell Swapper to swap!</li>
+</ul>
+<pre class="highlight swift"><code><span class="k">try!</span> <span class="n">swapperView</span><span class="o">.</span><span class="nf">swapTo</span><span class="p">(</span><span class="kt">ViewControllerSwapViews</span><span class="o">.</span><span class="n">tableView</span><span class="o">.</span><span class="n">rawValue</span><span class="p">)</span>
+</code></pre>
+
+<p>Swapper will now show the <code>UITableView</code> for you. Swapper will even fade out the <code>UIImageView</code> and fade in the <code>UITbleView</code> for you for a nice touch 👌. If you want to override the default animation, you can override the behavior yourself:</p>
+<pre class="highlight swift"><code><span class="kt">SwapperView</span><span class="o">.</span><span class="n">defaultConfig</span><span class="o">.</span><span class="n">swapToAnimateOldView</span> <span class="o">=</span> <span class="p">{</span> <span class="n">oldView</span> <span class="k">in</span>
+    <span class="c1">// Run `UIView.animate()` function here on `oldView` to animate it out. </span>
+<span class="p">}</span>
+<span class="kt">SwapperView</span><span class="o">.</span><span class="n">defaultConfig</span><span class="o">.</span><span class="n">swapToAnimateNewView</span> <span class="o">=</span> <span class="p">{</span> <span class="n">newView</span> <span class="k">in</span>
+    <span class="c1">// Run `UIView.animate()` function here on `newView` to animate it in. </span>
+<span class="p">}</span>
+</code></pre>
+
+<p><em>Note:</em> <code>.swapTo()</code> will thrown an error if the id passed in was not given in <code>.setSwappingViews()</code>. </p>
+<h1 id='configure-swapper' class='heading'>Configure Swapper</h1>
+
+<p>Swapper works great without any configuration necessary. However, if you wish to customize it yourself, you can. </p>
+
+<p>If you want to change the default values of all instances of <code><a href="Classes/SwapperView.html">SwapperView</a></code> in your app, change the values in the default singleton:</p>
+<pre class="highlight swift"><code><span class="kt">SwapperView</span><span class="o">.</span><span class="n">defaultConfig</span><span class="o">.</span><span class="n">transitionAnimationDuration</span> <span class="o">=</span> <span class="mf">0.8</span>
+</code></pre>
+
+<p>Or, you can configure 1 single instance of <code><a href="Classes/SwapperView.html">SwapperView</a></code>:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">swapperView</span> <span class="o">=</span> <span class="kt">SwapperView</span><span class="p">()</span>
+<span class="k">var</span> <span class="nv">instanceConfig</span><span class="p">:</span> <span class="kt">SwapperViewConfig</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">config</span> <span class="o">=</span> <span class="kt">SwapperViewConfig</span><span class="p">()</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">backgroundColor</span> <span class="o">=</span> <span class="n">instanceConfigBackgroundColor</span>
+    <span class="k">return</span> <span class="n">config</span>
+<span class="p">}</span>
+<span class="n">swapperView</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">instanceConfig</span>
+</code></pre>
+
+<p>For a list of all the configuration options, view the <a href="https://levibostian.github.io/Swapper-iOS/Classes/SwapperViewConfig.html">docs on SwapperViewConfig</a></p>
+<h1 id='testing-with-swapper' class='heading'>Testing with Swapper</h1>
+
+<p>If you want to write UITests for your app and include Swapper in it, it&rsquo;s highly recommended that you set the animation duration when swapping to 0 seconds. </p>
+<pre class="highlight swift"><code><span class="kt">SwapperView</span><span class="o">.</span><span class="n">defaultConfig</span><span class="o">.</span><span class="n">transitionAnimationDuration</span> <span class="o">=</span> <span class="mf">0.0</span>
+</code></pre>
+<h2 id='example' class='heading'>Example</h2>
+
+<p>Swapper comes with an example app you can use to play with the library. To run the example project, clone the repo, and run <code>pod install</code> from the Example directory first. Then, open the workspace in XCode. </p>
+<h2 id='development' class='heading'>Development</h2>
+
+<p>Swapper is a pretty simple CocoaPods library project. Follow the directions below for the optimal development experience. </p>
+
+<ul>
+<li>Install cocoapods/gems and setup workspace:</li>
+</ul>
+<pre class="highlight shell"><code><span class="nv">$&gt;</span> bundle <span class="nb">install</span>
+<span class="nv">$&gt;</span> <span class="nb">cd </span>Swapper/Example
+<span class="nv">$&gt;</span> pod <span class="nb">install</span>
+</code></pre>
+
+<ul>
+<li>Setup git hooks <a href="https://github.com/brigade/overcommit/">via overcommit</a> to run misc tasks for you when using git.</li>
+</ul>
+<pre class="highlight shell"><code><span class="nv">$&gt;</span> overcommit <span class="nt">--install</span>
 </code></pre>
 <h2 id='author' class='heading'>Author</h2>
 
-<p>Levi Bostian, <a href="mailto:levi.bostian@gmail.com">levi.bostian@gmail.com</a></p>
+<ul>
+<li>Levi Bostian - <a href="https://github.com/levibostian">GitHub</a>, <a href="https://twitter.com/levibostian">Twitter</a>, <a href="http://levibostian.com">Website/blog</a></li>
+</ul>
+
+<p><img src="https://gravatar.com/avatar/22355580305146b21508c74ff6b44bc5?s=250" alt="Levi Bostian image"></p>
+<h2 id='contribute' class='heading'>Contribute</h2>
+
+<p>Swapper is open for pull requests. Check out the <a href="https://github.com/levibostian/swapper-ios/issues">list of issues</a> for tasks I am planning on working on. Check them out if you wish to contribute in that way.</p>
+
+<p><strong>Want to add features to Swapper?</strong> Before you decide to take a bunch of time and add functionality to the library, please, <a href="https://github.com/levibostian/swapper-iOS/issues/new">create an issue</a> stating what you wish to add. This might save you some time in case your purpose does not fit well in the use cases of Swapper.</p>
 <h2 id='license' class='heading'>License</h2>
 
 <p>Swapper is available under the MIT license. See the LICENSE file for more info.</p>
@@ -86,7 +213,7 @@ it, simply add the following line to your Podfile:</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://github.com/levibostian/" target="_blank" rel="external">Levi Bostian</a>. All rights reserved. (Last updated: 2019-08-06)</p>
+          <p>&copy; 2019 <a class="link" href="https://github.com/levibostian/" target="_blank" rel="external">Levi Bostian</a>. All rights reserved. (Last updated: 2019-08-08)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.10.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

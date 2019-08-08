@@ -41,10 +41,14 @@ class SwapperViewTests: XCTestCase {
             ("1", UIView()),
             ("2", UIView())
         ]
-
-        swapperView.swapToAnimateOldView = { oldView in
-            expectAnimatorToBeCalled.fulfill()
+        var swapConfig: SwapperViewConfig {
+            let config = SwapperViewConfig()
+            config.swapToAnimateOldView = { oldView in
+                expectAnimatorToBeCalled.fulfill()
+            }
+            return config
         }
+        swapperView.config = swapConfig
 
         swapperView.setSwappingViews(swappingViews)
 
@@ -60,9 +64,14 @@ class SwapperViewTests: XCTestCase {
             ("2", UIView())
         ]
 
-        swapperView.swapToAnimateNewView = { oldView in
-            expectAnimatorToBeCalled.fulfill()
+        var swapConfig: SwapperViewConfig {
+            let config = SwapperViewConfig()
+            config.swapToAnimateNewView = { newView in
+                expectAnimatorToBeCalled.fulfill()
+            }
+            return config
         }
+        swapperView.config = swapConfig
 
         swapperView.setSwappingViews(swappingViews)
 
@@ -114,14 +123,14 @@ class SwapperViewTests: XCTestCase {
         ]
 
         swapperView.setSwappingViews(swappingViews)
-            try! swapperView.swapTo(swappingViews[1].0) {
-                self.swapperView.setSwappingViews(newSetSwappingViews)
+        try! swapperView.swapTo(swappingViews[1].0) {
+            self.swapperView.setSwappingViews(newSetSwappingViews)
 
-                XCTAssertEqual(self.swapperView.currentView!.0, newSetSwappingViews[0].0)
-                XCTAssertEqual(self.swapperView.subviews[0], newSetSwappingViews[0].1)
+            XCTAssertEqual(self.swapperView.currentView!.0, newSetSwappingViews[0].0)
+            XCTAssertEqual(self.swapperView.subviews[0], newSetSwappingViews[0].1)
 
-                expectatation.fulfill()
-            }
+            expectatation.fulfill()
+        }
 
         wait(for: [expectatation], timeout: TestConfig.defaultWait)
     }

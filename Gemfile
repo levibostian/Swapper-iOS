@@ -17,3 +17,5 @@ gem "cocoacache", "~> 0.1.0"
 gem "danger-swiftformat", "~> 0.6.0"
 
 gem "danger-swiftlint", "~> 0.23.0"
+
+gem "danger-jazzy", "~> 1.1.0"

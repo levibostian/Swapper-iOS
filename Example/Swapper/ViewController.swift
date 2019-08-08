@@ -69,7 +69,7 @@ class ViewController: UIViewController {
         swapperView.setSwappingViews([
             (ViewControllerSwapViews.mtMcKinley.rawValue, mtMcKinleyImageView),
             (ViewControllerSwapViews.littleHill.rawValue, littleHillImageView)
-            ])
+        ])
 
         swapButton.addTarget(self, action: #selector(swapButtonPressed), for: .touchUpInside)
     }

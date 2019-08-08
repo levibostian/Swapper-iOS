@@ -8,6 +8,8 @@
 
 Swap between many different UIViews within your app quick and easy.
 
+![project logo](misc/header.jpg)
+
 ## What is Swapper?
 
 You know those moments in your app when you have a `UITableView` that has no rows to show? You know those moments when you perform a HTTP network request and you want to show a non-blocking loading view to the user? These are very common scenarios for mobile apps. Swapper is a `UIView` that allows you to swap between a set of other `UIView`s with just 1 line of code. 
@@ -84,8 +86,11 @@ try! swapperView.swapTo(ViewControllerSwapViews.tableView.rawValue)
 Swapper will now show the `UITableView` for you. Swapper will even fade out the `UIImageView` and fade in the `UITbleView` for you for a nice touch 👌. If you want to override the default animation, you can override the behavior yourself:
 
 ```swift
-swapperView.swapToAnimateOldView = { oldView in
-    // Run `UIView.animate()` function here on `oldView` to animate it. 
+SwapperView.defaultConfig.swapToAnimateOldView = { oldView in
+    // Run `UIView.animate()` function here on `oldView` to animate it out. 
+}
+SwapperView.defaultConfig.swapToAnimateNewView = { newView in
+    // Run `UIView.animate()` function here on `newView` to animate it in. 
 }
 ```
 
