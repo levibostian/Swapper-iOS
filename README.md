@@ -21,7 +21,7 @@ You know those moments in your app when you have a `UITableView` that has no row
 * UI testing friendly. 
 * Setup with default values that should work for 95% of your use cases. Customizable for those other cases. 
 * Full test suite. [![Build Status](https://travis-ci.com/levibostian/Swapper-iOS.svg?branch=master)](https://travis-ci.com/levibostian/Swapper-iOS)
-* [Full documentation](http://cocoadocs.org/docsets/Swapper). 
+* [Full documentation](https://levibostian.github.io/Swapper-iOS/). 
 
 ## Installation
 
