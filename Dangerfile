@@ -21,8 +21,9 @@ def determineIfRelease(files_to_update_for_releases)
 
     if git.diff_for_file(release_file_relative_path) 
       if num_files_updated == 0        
-        message "🚀 I am going to assume that this *is a release* pull request because you have edited a file that would be updated for releases. 🚀 File: #{release_file_relative_path} edited."        
+        message "🚀 I am going to assume that this *is a release* pull request because you have edited a file that would be updated for releases. 🚀"
       end 
+      message "Release file edited: #{release_file_relative_path}"
 
       num_files_updated += 1
     else
@@ -51,10 +52,8 @@ if ENV["CI"]
     message "You forgot to write documentation for this: ", file:item.file, line:item.line
   end
 
-  if github.branch_for_base == "master"
-    if !(github.pr_title + github.pr_body).include?("#hotfix")
-      determineIfRelease(files_to_update_for_releases)      
-    end
+  if github.branch_for_base == "master"    
+    determineIfRelease(files_to_update_for_releases)          
   end
 else 
   puts "It looks like you are looking for instructions on how to deploy your app, huh? Well, edit these files with these instructions: \n\n"
