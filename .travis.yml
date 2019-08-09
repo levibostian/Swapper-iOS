@@ -15,7 +15,7 @@ install:
 env:
   global:
     # COCOAPODS_TRUNK_TOKEN - access token to deploy to cocoapods.
-    - secure: "sPMM+zVNWuXtz3N7ciwl+RqWdlPSRWzRrsoa6eVeTNpg/Zds2vmYWPuvDHXrz696QwetYl+vmYlqjN7rN1lLD5rGfjlI+Hf/N4fuOa4hnSue3OhrNAgLiOd7/FjKM0EdzSZ+d3w50Z75KQVgTKyCgwGlD48GN/P+91orcNDKCSxprD65HFSJGjot3E0W4urKlwhQ4v0CmR8ren3wtdJ2gcoeLf/m/YFbrI/20r6k/moc9UKUUn8gLslPxU2EvS3nH93nsC7Gf3XeHOAwXXQpZEhGvUeVLewTZ1I5Ql2Ktw+9mt8BJ7u97m3JN+ho6jZtR9PvL3qmVskNpzvwsoVx+mpx2V2aLuxtlr3kEkRUtzniWJ9f6aOZtdxDV0JwWRgClnzQHY835gTs4TPNi648g6eX01w3/kuEWJeCibQPR05qhy+cctwJXOQ0sRE/agxS3WD0ia3hTG8X7cjajJ2LiPh8/djjsfVPMYGrmx9bh/fLPuEHtRJqwcBUvPI++x6FA+kmXAit6497x8Zf9PG3PCyHLpn4nrTddFlvLvNQTEljmLjfxcBTumXt9feiJa5U3ylZj4KbVzFPiIhPuLPPPqZAzbE/WkVzgRQ9/TpU2Z2RSRnYNN/0VoxzfL3djeLpOvA+Ep6b8cjIEzYfPH+2Tazs/YlP1hQNdw0Q0XA7De4="
+    - secure: "ZL0zY1sRz29Fb25KUyXYWxVhyTUqWWu97/WT3hrNtL+xbA0TK7O6Pee9gu2Xtinj9Ca2MVhjHsRQkM7sXk2NYaYhrM+/VbXefc7VcbhslgQcqq8QtP4InQqOH0fn0Qf6gT4eDfoR58dY7b3/wkNB4qwp0/5cHA0955hBFSrF9d28ctz9+w0+ZRMNitLkcu7n3BSKx1z93ANwjukGAGQ2AHrDAhZASWOSQ3hGUSLuUmal25VlWrUo0yVL6g5yt5QYHiJrCtE/+a6zT2KIJA0EYZZO3q3LOYrQy3bcR7WLLJnR2dYbH01AqzJ7QEpoxGAQ4KZCzw1PoVdycsg9ysX71A53VMLpN9Yz0XoFGa6ln8HOQTS1iiw6JBexm+2Tik1TjblTs2kiQwnLoZlfJ18/gDRFwaeKReXi0La+SqwmSDiZDJQsx6DkH0qSB7vDJaASGMONDhYj3jho8gg8eYs/kJRIb8g3ieO4VPuKVNodbMOdqU+AtN6MNxRddVM1HH5tms5O89t3ipKY8Vnl2RPRBm4u4wJCO+ZR0W+5JKdBxocPF7KniDX6fcO9XjnL2+2T3q/OKxjfX4g6jijHVW8I/m7n7H1iZ39uy/plXTiqKHG9IvJRYjydk3ybh6Nf/QvLbzL4EUe724pbrBIMLPjletOJ9iwJGmyNmI+UjVoou+U="    
 
 jobs:
   include:
@@ -29,7 +29,7 @@ jobs:
 stages:
   - name: tests
     if: type IN (pull_request, push) AND tag IS blank
-  - stage: pull-request
+  - name: pull-request
     if: type IN (pull_request)
   - name: deploy
     if: tag IS present
