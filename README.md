@@ -23,6 +23,8 @@ You know those moments in your app when you have a `UITableView` that has no row
 * Full test suite. [![Build Status](https://travis-ci.com/levibostian/Swapper-iOS.svg?branch=master)](https://travis-ci.com/levibostian/Swapper-iOS)
 * [Full documentation](https://levibostian.github.io/Swapper-iOS/). 
 
+I recommend you check out 2 other libraries that work nicely with Swapper: [Empty](https://github.com/levibostian/Empty-iOS) and [PleaseHold](https://github.com/levibostian/PleaseHold-iOS).
+
 ## Installation
 
 Swapper is available through [CocoaPods](https://cocoapods.org/pods/Swapper). To install it, simply add the following line to your Podfile:
