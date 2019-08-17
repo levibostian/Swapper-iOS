@@ -146,11 +146,13 @@ $> cd Swapper/Example
 $> pod install
 ```
 
-* Setup git hooks [via overcommit](https://github.com/brigade/overcommit/) to run misc tasks for you when using git. 
+* Setup git hooks to run misc tasks for you when using git. 
 
 ```bash
-$> overcommit --install
+$> ./hooks/autohook.sh install
 ```
+
+The git hook scripts are installed in `hooks/`. View them if you wish. 
 
 ## Author
 

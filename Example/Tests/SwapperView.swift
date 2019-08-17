@@ -1,11 +1,17 @@
-import Swapper
+@testable import Swapper
 import XCTest
 
 class SwapperViewTests: XCTestCase {
     private var swapperView: SwapperView!
+    private var threadUtil: MockThreadUtil!
 
     override func setUp() {
         super.setUp()
+
+        threadUtil = MockThreadUtil()
+
+        Di.instance = Di()
+        Di.instance.threadUtil = threadUtil
 
         swapperView = SwapperView()
         SwapperView.defaultConfig.transitionAnimationDuration = 0.0
@@ -13,6 +19,8 @@ class SwapperViewTests: XCTestCase {
 
     override func tearDown() {
         super.tearDown()
+
+        Di.instance = Di()
     }
 
     func test_choosesInstanceConfigOverDefaultConfig() {
@@ -55,6 +63,29 @@ class SwapperViewTests: XCTestCase {
         try! swapperView.swapTo(swappingViews[1].0, onComplete: nil)
 
         wait(for: [expectAnimatorToBeCalled], timeout: TestConfig.defaultWait)
+    }
+
+    func test_setSwappingViews_expectCallThreadUtil() {
+        let swappingViews = [
+            ("1", UIView())
+        ]
+
+        XCTAssertEqual(threadUtil.mock_assertIsMain_calls, 0)
+        swapperView.setSwappingViews(swappingViews)
+        XCTAssertGreaterThan(threadUtil.mock_assertIsMain_calls, 0)
+    }
+
+    func test_swapTo_expectCallThreadUtil() {
+        let swappingViews = [
+            ("1", UIView())
+        ]
+
+        swapperView.setSwappingViews(swappingViews)
+        let numberCallsAssertMain = threadUtil.mock_assertIsMain_calls
+
+        try! swapperView.swapTo(swappingViews[0].0) {
+            XCTAssertEqual(self.threadUtil.mock_assertIsMain_calls, numberCallsAssertMain + 1)
+        }
     }
 
     func test_swapToAnimateNewView_expectToBeCalledWhenSet() {

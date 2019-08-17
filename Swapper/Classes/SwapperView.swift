@@ -15,6 +15,8 @@ public class SwapperView: UIView {
         }
     }
 
+    private var thread: ThreadUtil = Di.instance.threadUtil
+
     private var _config: SwapperViewConfig {
         return config ?? SwapperView.defaultConfig
     }
@@ -37,6 +39,8 @@ public class SwapperView: UIView {
 
     /// Remove all of the previous swapping views and set new ones. The first view in the list will be shown after this function called.
     public func setSwappingViews(_ newSwappingViews: [(String, SwappableView)]) {
+        thread.assertIsMain()
+
         removeAllSubviews() // Since we are changing the views, it's ok if we instantly change up what screen is shown. No need for animation.
         currentView = nil
         swappingViews = [:]
@@ -67,6 +71,8 @@ public class SwapperView: UIView {
     /// - Parameter onComplete: Optional parameter to tell you when the swap animation is complete and the new view is shown.
     /// - Throws: `SwapperError.viewToSwapToDoesNotExist` If the `viewIndicator` is not found in `self.swappingViews`.
     public func swapTo(_ viewIndicator: String, onComplete: (() -> Void)?) throws {
+        thread.assertIsMain()
+
         guard let viewToSwapTo = self.swappingViews[viewIndicator] else {
             throw SwapperError.viewToSwapToDoesNotExist(viewIndicator: viewIndicator)
         }
