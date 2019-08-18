@@ -16,12 +16,12 @@
 		F76DBF7D22FA389F00E526A6 /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76DBF7C22FA389F00E526A6 /* AccessibilityIdentifiers.swift */; };
 		F76DBF7E22FA389F00E526A6 /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76DBF7C22FA389F00E526A6 /* AccessibilityIdentifiers.swift */; };
 		F76DBF8222FA3C5200E526A6 /* XCUIElementExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76DBF8022FA3C5200E526A6 /* XCUIElementExtension.swift */; };
-		F76DBF8622FA3EBE00E526A6 /* SwapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76DBF8522FA3EBE00E526A6 /* SwapperView.swift */; };
+		F76DBF8622FA3EBE00E526A6 /* SwapperViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76DBF8522FA3EBE00E526A6 /* SwapperViewTests.swift */; };
 		F76DBF8822FA45AC00E526A6 /* TestConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76DBF8722FA45AC00E526A6 /* TestConfig.swift */; };
 		F7ADD164230893D700C23C72 /* MockThreadUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7ADD163230893D700C23C72 /* MockThreadUtil.swift */; };
 		F7C2583E22FA19500029ED1B /* Swapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7C2583D22FA19500029ED1B /* Swapper.framework */; };
-		F7D1E02E22FA22060034DFE8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D1E02D22FA22060034DFE8 /* ViewController.swift */; };
-		F7D1E03722FA236B0034DFE8 /* SwapperViewConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D1E03522FA236B0034DFE8 /* SwapperViewConfig.swift */; };
+		F7D1E02E22FA22060034DFE8 /* ViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D1E02D22FA22060034DFE8 /* ViewControllerTests.swift */; };
+		F7D1E03722FA236B0034DFE8 /* SwapperViewConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D1E03522FA236B0034DFE8 /* SwapperViewConfigTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,15 +61,15 @@
 		E84092A64C28D1F66B734B55 /* Pods-Swapper_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swapper_Example.release.xcconfig"; path = "Target Support Files/Pods-Swapper_Example/Pods-Swapper_Example.release.xcconfig"; sourceTree = "<group>"; };
 		F76DBF7C22FA389F00E526A6 /* AccessibilityIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifiers.swift; sourceTree = "<group>"; };
 		F76DBF8022FA3C5200E526A6 /* XCUIElementExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCUIElementExtension.swift; sourceTree = "<group>"; };
-		F76DBF8522FA3EBE00E526A6 /* SwapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapperView.swift; sourceTree = "<group>"; };
+		F76DBF8522FA3EBE00E526A6 /* SwapperViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapperViewTests.swift; sourceTree = "<group>"; };
 		F76DBF8722FA45AC00E526A6 /* TestConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConfig.swift; sourceTree = "<group>"; };
 		F7ADD163230893D700C23C72 /* MockThreadUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MockThreadUtil.swift; path = mocks/MockThreadUtil.swift; sourceTree = "<group>"; };
 		F7C2583B22FA19500029ED1B /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7C2583D22FA19500029ED1B /* Swapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Swapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7D1E02B22FA22050034DFE8 /* Swapper_ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Swapper_ExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F7D1E02D22FA22060034DFE8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F7D1E02D22FA22060034DFE8 /* ViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTests.swift; sourceTree = "<group>"; };
 		F7D1E02F22FA22060034DFE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F7D1E03522FA236B0034DFE8 /* SwapperViewConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapperViewConfig.swift; sourceTree = "<group>"; };
+		F7D1E03522FA236B0034DFE8 /* SwapperViewConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapperViewConfigTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,8 +161,8 @@
 			children = (
 				F7ADD162230893C200C23C72 /* mocks */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
-				F7D1E03522FA236B0034DFE8 /* SwapperViewConfig.swift */,
-				F76DBF8522FA3EBE00E526A6 /* SwapperView.swift */,
+				F7D1E03522FA236B0034DFE8 /* SwapperViewConfigTests.swift */,
+				F76DBF8522FA3EBE00E526A6 /* SwapperViewTests.swift */,
 				F76DBF8722FA45AC00E526A6 /* TestConfig.swift */,
 			);
 			path = Tests;
@@ -217,7 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				F76DBF7F22FA3AE100E526A6 /* extension */,
-				F7D1E02D22FA22060034DFE8 /* ViewController.swift */,
+				F7D1E02D22FA22060034DFE8 /* ViewControllerTests.swift */,
 				F7D1E02F22FA22060034DFE8 /* Info.plist */,
 			);
 			path = Swapper_ExampleUITests;
@@ -437,8 +437,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F7D1E03722FA236B0034DFE8 /* SwapperViewConfig.swift in Sources */,
-				F76DBF8622FA3EBE00E526A6 /* SwapperView.swift in Sources */,
+				F7D1E03722FA236B0034DFE8 /* SwapperViewConfigTests.swift in Sources */,
+				F76DBF8622FA3EBE00E526A6 /* SwapperViewTests.swift in Sources */,
 				F76DBF8822FA45AC00E526A6 /* TestConfig.swift in Sources */,
 				F7ADD164230893D700C23C72 /* MockThreadUtil.swift in Sources */,
 			);
@@ -448,7 +448,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F7D1E02E22FA22060034DFE8 /* ViewController.swift in Sources */,
+				F7D1E02E22FA22060034DFE8 /* ViewControllerTests.swift in Sources */,
 				F76DBF7E22FA389F00E526A6 /* AccessibilityIdentifiers.swift in Sources */,
 				F76DBF8222FA3C5200E526A6 /* XCUIElementExtension.swift in Sources */,
 			);
