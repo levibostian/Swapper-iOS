@@ -9,15 +9,13 @@ public class SwapperView: UIView {
     /// Access to `SwapperViewConfig` to set defaults on all instances of `SwapperView`.
     public static let defaultConfig: SwapperViewConfig = SwapperViewConfig.shared
     /// Override `defaultConfig` for this once instance.
-    public var config: SwapperViewConfig? {
+    public var config: SwapperViewConfig = SwapperViewConfig.shared {
         didSet {
             configView()
         }
     }
 
-    private var _config: SwapperViewConfig {
-        return config ?? SwapperView.defaultConfig
-    }
+    private var thread: ThreadUtil = Di.instance.threadUtil
 
     convenience init() {
         self.init(frame: CGRect.zero)
@@ -31,12 +29,12 @@ public class SwapperView: UIView {
         setNeedsUpdateConstraints()
     }
 
-    private func configView() {
-        backgroundColor = _config.backgroundColor
-    }
+    private func configView() {}
 
     /// Remove all of the previous swapping views and set new ones. The first view in the list will be shown after this function called.
     public func setSwappingViews(_ newSwappingViews: [(String, SwappableView)]) {
+        thread.assertIsMain()
+
         removeAllSubviews() // Since we are changing the views, it's ok if we instantly change up what screen is shown. No need for animation.
         currentView = nil
         swappingViews = [:]
@@ -67,14 +65,18 @@ public class SwapperView: UIView {
     /// - Parameter onComplete: Optional parameter to tell you when the swap animation is complete and the new view is shown.
     /// - Throws: `SwapperError.viewToSwapToDoesNotExist` If the `viewIndicator` is not found in `self.swappingViews`.
     public func swapTo(_ viewIndicator: String, onComplete: (() -> Void)?) throws {
+        thread.assertIsMain()
+
+        if currentView?.0 == viewIndicator { // the view to swap to is already being shown. Ignore.
+            return
+        }
+
         guard let viewToSwapTo = self.swappingViews[viewIndicator] else {
             throw SwapperError.viewToSwapToDoesNotExist(viewIndicator: viewIndicator)
         }
 
-        let isFirstViewToShow = subviews.isEmpty
-
         func setupConstraints(on view: UIView) {
-            guard _config.updateAutoLayoutConstraints else {
+            guard config.updateAutoLayoutConstraints else {
                 return
             }
 
@@ -88,27 +90,38 @@ public class SwapperView: UIView {
             view.updateConstraints()
         }
 
-        if isFirstViewToShow {
+        // Set currentView now, because even though it's not the current view until after the animation is done, we rely on this variable in other places so change now as it's the intended currentView.
+        currentView = (viewIndicator, viewToSwapTo)
+
+        let isFirstViewToShow = subviews.isEmpty
+        viewToSwapTo.layer.removeAllAnimations()
+        let animationDuration = config.transitionAnimationDuration
+
+        if isFirstViewToShow || animationDuration <= 0.0 {
+            removeAllSubviews()
             addSubview(viewToSwapTo)
-            currentView = (viewIndicator, viewToSwapTo)
             setupConstraints(on: viewToSwapTo)
+            onComplete?()
         } else {
             let oldView = subviews[0]
+            oldView.layer.removeAllAnimations()
 
-            UIView.animate(withDuration: _config.transitionAnimationDuration, animations: {
-                self._config.swapToAnimateOldView(oldView)
-            }, completion: { _ in
-                self.removeAllSubviews()
-                self.addSubview(viewToSwapTo)
-                setupConstraints(on: viewToSwapTo)
+            UIView.animate(withDuration: animationDuration, animations: {
+                self.config.swapToAnimateOldView(oldView)
+            }, completion: { complete in
+                if complete { // if animation didn't complete, it may have been cancelled.
+                    self.removeAllSubviews()
+                    self.addSubview(viewToSwapTo)
+                    setupConstraints(on: viewToSwapTo)
 
-                UIView.animate(withDuration: self._config.transitionAnimationDuration / 2, animations: {
-                    self._config.swapToAnimateNewView(viewToSwapTo)
-                }, completion: { _ in
-                    self.currentView = (viewIndicator, viewToSwapTo)
-
+                    UIView.animate(withDuration: animationDuration, animations: {
+                        self.config.swapToAnimateNewView(viewToSwapTo)
+                    }, completion: { _ in
+                        onComplete?()
+                    })
+                } else {
                     onComplete?()
-                })
+                }
             })
         }
     }

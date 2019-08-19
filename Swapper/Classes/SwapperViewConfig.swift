@@ -5,9 +5,6 @@ public class SwapperViewConfig {
     /// Singleton access to `SwapperViewConfig`.
     public static var shared: SwapperViewConfig = SwapperViewConfig()
 
-    /// The background color of `SwapperView`.
-    public var backgroundColor: UIColor = .white
-
     /// Create instance of `SwapperViewConfig`
     public init() {}
 
