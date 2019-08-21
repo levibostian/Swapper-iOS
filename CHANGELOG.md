@@ -1,3 +1,12 @@
+### [0.1.1] - 2019-08-21
+
+### Fixed 
+- swapTo() cancels previous request
+
+### Changed
+- Using new git hooks tool. A packaged bash script. 
+- Assert certain functions called from main thread
+
 ### [0.1.0] - 2019-08-08
 
 First release!
