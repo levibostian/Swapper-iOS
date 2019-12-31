@@ -10,6 +10,8 @@ Swap between many different UIViews within your app quick and easy.
 
 ![project logo](misc/header.jpg)
 
+*Android developer? Check out [the Android version of Swapper!](https://github.com/levibostian/swapper-android)*
+
 ## What is Swapper?
 
 You know those moments in your app when you have a `UITableView` that has no rows to show? You know those moments when you perform a HTTP network request and you want to show a non-blocking loading view to the user? These are very common scenarios for mobile apps. Swapper is a `UIView` that allows you to swap between a set of other `UIView`s with just 1 line of code. 

@@ -5,7 +5,7 @@ language: swift
 cache:
   bundler: true 
   cocoapods: true
-  
+
 before_install:
   - gem install cocoapods
   - pod --version

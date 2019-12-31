@@ -284,7 +284,7 @@ GEM
       launchy (~> 2.1)
       pusher-client (~> 0.4)
       typhoeus (~> 0.6, >= 0.6.8)
-    trent (0.4.0)
+    trent (0.5.0)
       colorize (~> 0.8, >= 0.8.1)
       net-ssh (~> 5.0, >= 5.0.2)
       travis (~> 1.8, >= 1.8.2)
@@ -326,7 +326,7 @@ DEPENDENCIES
   danger-swiftlint (~> 0.23.0)
   fastlane
   jazzy (~> 0.10.0)
-  trent (~> 0.4.0)
+  trent (~> 0.5.0)
 
 BUNDLED WITH
-   1.17.3
+   2.0.2
