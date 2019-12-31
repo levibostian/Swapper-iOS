@@ -124,11 +124,13 @@ For a list of all the configuration options, view the [docs on SwapperViewConfig
 
 # Testing with Swapper 
 
-If you want to write UITests for your app and include Swapper in it, it's highly recommended that you set the animation duration when swapping to 0 seconds. 
+If you want to write tests for your app and include Swapper in it, it's highly recommended to disable animations. 
 
 ```swift
-SwapperView.defaultConfig.transitionAnimationDuration = 0.0
+UIView.setAnimationsEnabled(false)
 ```
+
+Done! Swapper inherits this property and will enable or disable animations with this setting. 
 
 ## Example
 

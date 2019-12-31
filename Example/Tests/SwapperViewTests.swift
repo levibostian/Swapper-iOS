@@ -24,6 +24,8 @@ class SwapperViewTests: XCTestCase {
 
     override func tearDown() {
         super.tearDown()
+        
+        UIView.setAnimationsEnabled(true)
 
         swapperView.removeFromSuperview()
 
@@ -121,6 +123,35 @@ class SwapperViewTests: XCTestCase {
             ("2", UIView())
         ]
         swapperViewConfig.transitionAnimationDuration = 0.0
+        swapperViewConfig.swapToAnimateOldView = { oldView in
+            expectAnimateOldViewNotCalled.fulfill()
+        }
+        swapperViewConfig.swapToAnimateNewView = { newView in
+            expectAnimateNewViewNotCalled.fulfill()
+        }
+        swapperView.config = swapperViewConfig
+
+        swapperView.setSwappingViews(swappingViews)
+
+        try! swapperView.swapTo(swappingViews[1].0, onComplete: {
+            expectOnComplete.fulfill()
+        })
+
+        waitForExpectations(timeout: TestConfig.defaultWait, handler: nil)
+    }
+    
+    func test_swapTo_disableGlobalAnimations_expectOnCompleteNoAnimation() {
+        let expectAnimateOldViewNotCalled = XCTestExpectation(description: "Expect animate old view to NOT be called")
+        expectAnimateOldViewNotCalled.isInverted = true
+        let expectAnimateNewViewNotCalled = XCTestExpectation(description: "Expect animate new view to NOT be called")
+        expectAnimateNewViewNotCalled.isInverted = true
+        let expectOnComplete = expectation(description: "Expect onComplete to be called")
+
+        let swappingViews = [
+            ("1", UIView()),
+            ("2", UIView())
+        ]
+        UIView.setAnimationsEnabled(false)
         swapperViewConfig.swapToAnimateOldView = { oldView in
             expectAnimateOldViewNotCalled.fulfill()
         }

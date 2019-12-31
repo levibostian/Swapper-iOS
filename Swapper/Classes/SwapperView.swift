@@ -97,7 +97,7 @@ public class SwapperView: UIView {
         viewToSwapTo.layer.removeAllAnimations()
         let animationDuration = config.transitionAnimationDuration
 
-        if isFirstViewToShow || animationDuration <= 0.0 {
+        if isFirstViewToShow || animationDuration <= 0.0 || !UIView.areAnimationsEnabled {
             removeAllSubviews()
             addSubview(viewToSwapTo)
             setupConstraints(on: viewToSwapTo)
