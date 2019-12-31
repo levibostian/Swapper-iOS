@@ -43,10 +43,13 @@ if ENV["CI"]
   swiftformat.binary_path = "Example/Pods/SwiftFormat/CommandLineTool/swiftformat"
   swiftformat.check_format(fail_on_error: true)
 
+  swiftlint.verbose = true
   swiftlint.binary_path = 'Example/Pods/SwiftLint/swiftlint'
-  swiftlint.lint_files fail_on_error: true
-  swiftlint.config_file = '.swiftlint.yml'  
-  swiftlint.max_num_violations = 0
+  swiftlint.max_num_violations = 0  
+  swiftlint.lint_files fail_on_error: true    
+
+  junit.parse "reports/report.junit"
+  junit.report  
 
   jazzy.undocumented(:all).each do |item|
     message "You forgot to write documentation for this: ", file:item.file, line:item.line

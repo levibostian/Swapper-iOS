@@ -4,8 +4,8 @@
 # In general, you can use the options available
 # fastlane scan --help
 
-workspace("Example/Swapper.xcworkspace")
 scheme("Swapper-Example")
+workspace("Example/Swapper.xcworkspace")
 skip_slack(true)
 configuration("Debug")
 output_types("html,junit")
