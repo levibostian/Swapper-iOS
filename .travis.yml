@@ -10,6 +10,7 @@ before_install:
   - gem install cocoapods
   - pod --version
   - pod repo update
+  - gem install bundler # newer version of bundler 
 install:
   - bundle install
   - cd Example; pod install; cd ..;
