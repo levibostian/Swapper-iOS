@@ -1,3 +1,8 @@
+### [0.2.0] - 2019-12-30
+
+### Changed 
+- Disable animations through UIView config
+
 ### [0.1.1] - 2019-08-21
 
 ### Fixed 
