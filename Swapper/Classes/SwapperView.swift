@@ -80,13 +80,11 @@ public class SwapperView: UIView {
                 return
             }
 
-            let superviewMargins = layoutMarginsGuide
-
             view.translatesAutoresizingMaskIntoConstraints = false
-            view.leadingAnchor.constraint(equalTo: superviewMargins.leadingAnchor).isActive = true
-            view.topAnchor.constraint(equalTo: superviewMargins.topAnchor).isActive = true
-            view.trailingAnchor.constraint(equalTo: superviewMargins.trailingAnchor).isActive = true
-            view.bottomAnchor.constraint(equalTo: superviewMargins.bottomAnchor).isActive = true
+            view.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+            view.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+            view.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+            view.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
             view.updateConstraints()
         }
 
