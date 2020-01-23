@@ -81,10 +81,10 @@ public class SwapperView: UIView {
             }
 
             view.translatesAutoresizingMaskIntoConstraints = false
-            view.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-            view.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-            view.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-            view.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+            view.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+            view.topAnchor.constraint(equalTo: topAnchor).isActive = true
+            view.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+            view.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
             view.updateConstraints()
         }
 
