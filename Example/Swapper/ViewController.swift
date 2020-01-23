@@ -90,7 +90,8 @@ class ViewController: UIViewController {
     override func updateViewConstraints() {
         if !didSetupConstraints {
             swapperView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-            swapperView.widthAnchor.constraint(equalToConstant: 200).isActive = true
+            swapperView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            swapperView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
 
             rootView.centerYAnchor.constraint(equalTo: view.layoutMarginsGuide.centerYAnchor).isActive = true
             rootView.centerXAnchor.constraint(equalTo: view.layoutMarginsGuide.centerXAnchor).isActive = true
