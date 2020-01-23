@@ -1,3 +1,8 @@
+### [0.2.1] - 2020-01-23
+
+### Fixed 
+- swapperview added a padding to childviews
+
 ### [0.2.0] - 2019-12-30
 
 ### Changed 
