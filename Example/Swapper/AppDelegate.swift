@@ -8,7 +8,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         if CommandLine.arguments.contains("--uitesting") {
             // reset state. However, we don't have anything needing to reset right now.
-            SwapperView.defaultConfig.transitionAnimationDuration = 0.001 // Set animation duration low, but not zero so that animations still run but they run very fast.
+            SwapperViewConfig.shared.transitionAnimationDuration = 0.001 // Set animation duration low, but not zero so that animations still run but they run very fast.
         }
 
         window = UIWindow(frame: UIScreen.main.bounds)

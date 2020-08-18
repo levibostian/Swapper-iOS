@@ -42,8 +42,8 @@ Replace `version-here` with: [![Version](https://img.shields.io/cocoapods/v/Swap
 * Create an instance of `SwapperView` in your `UIViewController`. You can do this with Storyboard by adding a `UIView` to Storyboard and setting the `UIView` class to `SwapperView`, or create an instance in your Swift code:
 
 ```swift
-let swapperView: SwapperView = {
-    let view = SwapperView()
+let swapperView: SwapperView<ViewControllerSwapViews> = {
+    let view = SwapperView<ViewControllerSwapViews>()
     view.translatesAutoresizingMaskIntoConstraints = false
     view.backgroundColor = .white
     return view
@@ -57,34 +57,41 @@ In your `UIViewController`, add your `UIView`s to your `SwapperView`:
 ```swift
 import Swapper
 
-// It's recommended to use emum over strings. It will prevent bugs by not worrying about typos. 
-enum ViewControllerSwapViews: String {
+// It's recommended to use emum for the identifier. It will prevent bugs by not worrying about typos. 
+// However, you can just as easily use `SwapperView<String>` or something similar. 
+enum ViewControllerSwapViews: String, CustomStringConvertible {
     case imageView
     case tableView
+
+    var description: String {
+        return rawValue
+    }
 }
 
 class ViewController: UIViewController {
+
+    let swapperView = SwapperView<ViewControllerSwapViews>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         swapperView.setSwappingViews([
-            (ViewControllerSwapViews.imageView.rawValue, myImageView),
-            (ViewControllerSwapViews.tableView.rawValue, myTableView)
+            (.imageView, myImageView),
+            (.tableView, myTableView)
         ])
     }
 
 }
 ```
 
-Swapper is designed to automatically show the first `UIView` of the list given when you set the views. 
+*Note:*  Swapper holds onto `UIView` instances given with `setSwappingViews()` as a weak reference. Keep your own strong reference to make sure the app is working. 
 
 *Note:* Swapper will update the AutoLayout constraints of the `UIView`s you set as the swapping views. Swapper will set the size as the same size you set as the `SwapperView`. Therefore, no need to set AutoLayout constraints on your own! If you're not using AutoLayout, edit the configuration for `SwapperView` to not update the constraints: `SwapperView.defaultConfig.updateAutoLayoutConstraints = false`.
 
 * Lastly, all you need to do is to tell Swapper to swap!
 
 ```swift
-try! swapperView.swapTo(ViewControllerSwapViews.tableView.rawValue)
+try! swapperView.swapTo(.tableView)
 ```
 
 Swapper will now show the `UITableView` for you. Swapper will even fade out the `UIImageView` and fade in the `UITbleView` for you for a nice touch 👌. If you want to override the default animation, you can override the behavior yourself:
@@ -98,7 +105,7 @@ SwapperView.defaultConfig.swapToAnimateNewView = { newView in
 }
 ```
 
-*Note:* `.swapTo()` will thrown an error if the id passed in was not given in `.setSwappingViews()`. 
+*Note:* `.swapTo()` will thrown an error if the id passed in was not given in `.setSwappingViews()`. Or, the view you passed in has been garbage collected. Swapper only keeps weak references to given `UIView`s. 
 
 # Configure Swapper 
 
@@ -153,16 +160,19 @@ $> pod install
 * Setup git hooks to run misc tasks for you when using git. 
 
 ```bash
+$> brew install pre-commit
 $> ./hooks/autohook.sh install
 ```
 
 The git hook scripts are installed in `hooks/`. View them if you wish. 
 
-## Author
+## Contributors ✨
 
-* Levi Bostian - [GitHub](https://github.com/levibostian), [Twitter](https://twitter.com/levibostian), [Website/blog](http://levibostian.com)
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
-![Levi Bostian image](https://gravatar.com/avatar/22355580305146b21508c74ff6b44bc5?s=250)
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## Contribute
 
