@@ -56,8 +56,6 @@ public class SwapperView<ViewID: SwapperViewIdentifier>: UIView {
 
     /// Remove the old view that was shown before and show the new view to the screen.
     ///
-    ///
-    ///
     /// - Parameter viewIndicator: View from `self.swappingViews` to swap to.
     /// - Parameter animate: To animate or not.
     /// - Parameter onComplete: Optional parameter to tell you when the swap animation is complete and the new view is shown.
@@ -70,7 +68,7 @@ public class SwapperView<ViewID: SwapperViewIdentifier>: UIView {
             return
         }
 
-        guard let weakViewToSwapTo = self.swappingViews[viewIndicator] else {
+        guard let weakViewToSwapTo = swappingViews[viewIndicator] else {
             throw SwapperError.viewToSwapToNotAdded(viewIndicator: viewIndicator.description)
         }
         guard let viewToSwapTo = weakViewToSwapTo.value else {

@@ -4,7 +4,7 @@ import UIKit
 enum ViewControllerSwapViews: String, CustomStringConvertible {
     case mtMcKinley
     case littleHill
-    
+
     var description: String {
         return rawValue
     }

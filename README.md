@@ -160,16 +160,19 @@ $> pod install
 * Setup git hooks to run misc tasks for you when using git. 
 
 ```bash
+$> brew install pre-commit
 $> ./hooks/autohook.sh install
 ```
 
 The git hook scripts are installed in `hooks/`. View them if you wish. 
 
-## Author
+## Contributors ✨
 
-* Levi Bostian - [GitHub](https://github.com/levibostian), [Twitter](https://twitter.com/levibostian), [Website/blog](http://levibostian.com)
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
-![Levi Bostian image](https://gravatar.com/avatar/22355580305146b21508c74ff6b44bc5?s=250)
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## Contribute
 

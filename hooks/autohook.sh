@@ -4,7 +4,8 @@
 # A very, very small Git hook manager with focus on automation
 # Author:   Nik Kantar <http://nkantar.com>
 # Version:  2.1.1
-# Website:  https://github.com/levibostian/Autohook (forked from nkantar/AutoHook)
+# Website:  https://github.com/nkantar/Autohook
+
 
 echo() {
     builtin echo "[Autohook] $@";
@@ -43,7 +44,6 @@ install() {
     echo "Scripts installed into .git/hooks"
 }
 
-
 main() {
     calling_file=$(basename $0)
 
@@ -57,37 +57,28 @@ main() {
     else
         repo_root=$(git rev-parse --show-toplevel)
         hook_type=$calling_file
-        symlinks_dir="$repo_root/hooks/$hook_type"
-        files=("$symlinks_dir"/*)
-        number_of_symlinks="${#files[@]}"
-        if [[ $number_of_symlinks == 1 ]]
+        script="$repo_root/hooks/$hook_type.sh"
+        if [[ -f "$script" ]];
         then
-            if [[ "$(basename ${files[0]})" == "*" ]]
-            then
-                number_of_symlinks=0
-            fi
-        fi
-        echo "Looking for $hook_type scripts to run...found $number_of_symlinks!"
-        if [[ $number_of_symlinks -gt 0 ]]
-        then
+            echo "Running git hook, $hook_type"
+
             hook_exit_code=0
-            for file in "${files[@]}"
-            do
-                scriptname=$(basename $file)
-                echo "BEGIN $scriptname"
-                eval $file # &> /dev/null
-                script_exit_code=$?
-                if [[ $script_exit_code != 0 ]]
-                then
-                  hook_exit_code=$script_exit_code
-                fi
-                echo "FINISH $scriptname"
-            done
+            scriptname=$(basename $script)
+
+            eval $script
+            script_exit_code=$?
+            if [[ $script_exit_code != 0 ]]
+            then
+                hook_exit_code=$script_exit_code
+            fi
+
             if [[ $hook_exit_code != 0 ]]
             then
               echo "FAILED Script: $scriptname. exit code $hook_exit_code"
               exit $hook_exit_code
             fi
+        else
+            echo "No git hook to run for $hook_type"
         fi
     fi
 }

@@ -285,14 +285,14 @@ class SwapperViewTests: XCTestCase {
     func test_swapTo_throwsIfIdNotFound() {
         XCTAssertThrowsError(try swapperView.swapTo("not-found", onComplete: nil))
     }
-    
+
     func test_swapTo_throwsIfViewGone() {
         var view: UIView? = UIView()
-                
+
         swapperView.setSwappingViews([("1", view!)])
-        
+
         view = nil
-        
+
         XCTAssertThrowsError(try swapperView.swapTo("1", onComplete: nil))
     }
 
