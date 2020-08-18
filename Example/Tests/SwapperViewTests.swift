@@ -65,6 +65,7 @@ class SwapperViewTests: XCTestCase {
 
         swapperView.setSwappingViews(swappingViews)
 
+        try! swapperView.swapTo(swappingViews[0].0, onComplete: nil)
         try! swapperView.swapTo(swappingViews[1].0, onComplete: nil)
 
         wait(for: [expectAnimatorToBeCalled], timeout: TestConfig.defaultWait)
@@ -106,6 +107,7 @@ class SwapperViewTests: XCTestCase {
 
         swapperView.setSwappingViews(swappingViews)
 
+        try! swapperView.swapTo(swappingViews[0].0, onComplete: nil)
         try! swapperView.swapTo(swappingViews[1].0, onComplete: nil)
 
         wait(for: [expectAnimatorToBeCalled], timeout: TestConfig.defaultWait)
@@ -182,6 +184,7 @@ class SwapperViewTests: XCTestCase {
 
         swapperView.setSwappingViews(swappingViews)
 
+        try! swapperView.swapTo(swappingViews[0].0, onComplete: nil)
         try! swapperView.swapTo(swappingViews[1].0, onComplete: nil)
 
         wait(for: [expectAnimatorToBeCalled], timeout: TestConfig.defaultWait)
@@ -192,7 +195,7 @@ class SwapperViewTests: XCTestCase {
         XCTAssertNil(swapperView.currentView)
     }
 
-    func test_currentView_expectValueAfterSettingSwappableViews() {
+    func test_currentView_expectNilAfterSettingSwappableViews() {
         let swappingViews = [
             ("1", UIView()),
             ("2", UIButton())
@@ -200,8 +203,7 @@ class SwapperViewTests: XCTestCase {
 
         swapperView.setSwappingViews(swappingViews)
 
-        XCTAssertEqual(swapperView.currentView!.0, swappingViews[0].0)
-        XCTAssertEqual(swapperView.subviews[0], swappingViews[0].1)
+        XCTAssertNil(swapperView.currentView)
     }
 
     func test_currentView_expectValueAfterSwappingView() {
@@ -243,7 +245,7 @@ class SwapperViewTests: XCTestCase {
         waitForExpectations(timeout: TestConfig.defaultWait, handler: nil)
     }
 
-    func test_currentView_expectCorrectValueAfter_setSwappingViews_call() {
+    func test_currentView_expectCorrectNil_afterSetSwappingViews_call() {
         let expectatation = XCTestExpectation(description: "Test should be successful")
         let swappingViews = [
             ("1", UIView()),
@@ -259,8 +261,7 @@ class SwapperViewTests: XCTestCase {
         try! swapperView.swapTo(swappingViews[1].0) {
             self.swapperView.setSwappingViews(newSetSwappingViews)
 
-            XCTAssertEqual(self.swapperView.currentView!.0, newSetSwappingViews[0].0)
-            XCTAssertEqual(self.swapperView.subviews[0], newSetSwappingViews[0].1)
+            XCTAssertNil(self.swapperView.currentView) // should be nil as we just set new swapping views
 
             expectatation.fulfill()
         }
