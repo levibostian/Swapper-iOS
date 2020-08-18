@@ -42,7 +42,7 @@ public class SwapperView: UIView {
         newSwappingViews.forEach { newSwappingViewPair in
             let newSwappingView = newSwappingViewPair.1
 
-            swappingViews[newSwappingViewPair.0] = newSwappingView
+            swappingViews[newSwappingViewPair.0] = SwapperWeakView(newSwappingView)
         }
 
         if !newSwappingViews.isEmpty {
@@ -53,11 +53,11 @@ public class SwapperView: UIView {
     }
 
     /// Reference the currently shown view, if it's set.
-    public private(set) var currentView: (String, SwappableView)?
+    public private(set) var currentView: (String, SwapperWeakView)?
 
     /// All of the views that have been added to this `SwapperView`.
     /// - Note: See `self.setSwappingViews()` to set this.
-    public private(set) var swappingViews: [String: SwappableView] = [:]
+    public private(set) var swappingViews: [String: SwapperWeakView] = [:]
 
     /// Remove the old view that was shown before and show the new view to the screen.
     ///
@@ -71,7 +71,10 @@ public class SwapperView: UIView {
             return
         }
 
-        guard let viewToSwapTo = self.swappingViews[viewIndicator] else {
+        guard let weakViewToSwapTo = self.swappingViews[viewIndicator] else {
+            throw SwapperError.viewToSwapToDoesNotExist(viewIndicator: viewIndicator)
+        }
+        guard let viewToSwapTo = weakViewToSwapTo.value else {
             throw SwapperError.viewToSwapToDoesNotExist(viewIndicator: viewIndicator)
         }
 
@@ -89,7 +92,7 @@ public class SwapperView: UIView {
         }
 
         // Set currentView now, because even though it's not the current view until after the animation is done, we rely on this variable in other places so change now as it's the intended currentView.
-        currentView = (viewIndicator, viewToSwapTo)
+        currentView = (viewIndicator, weakViewToSwapTo)
 
         let isFirstViewToShow = subviews.isEmpty
         viewToSwapTo.layer.removeAllAnimations()

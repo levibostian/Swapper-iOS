@@ -79,6 +79,8 @@ class ViewController: UIViewController {
 
 Swapper is designed to automatically show the first `UIView` of the list given when you set the views. 
 
+*Note:*  Swapper holds onto `UIView` instances given with `setSwappingViews()` as a weak reference. Keep your own strong reference to make sure the app is working. 
+
 *Note:* Swapper will update the AutoLayout constraints of the `UIView`s you set as the swapping views. Swapper will set the size as the same size you set as the `SwapperView`. Therefore, no need to set AutoLayout constraints on your own! If you're not using AutoLayout, edit the configuration for `SwapperView` to not update the constraints: `SwapperView.defaultConfig.updateAutoLayoutConstraints = false`.
 
 * Lastly, all you need to do is to tell Swapper to swap!
