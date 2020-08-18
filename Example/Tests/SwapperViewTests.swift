@@ -2,7 +2,7 @@
 import XCTest
 
 class SwapperViewTests: XCTestCase {
-    private var swapperView: SwapperView!
+    private var swapperView: SwapperView<String>!
     private var threadUtil: MockThreadUtil!
     private var swapperViewConfig: SwapperViewConfig! // Create a default config for testing so that animation duration is set to default
 
@@ -17,7 +17,7 @@ class SwapperViewTests: XCTestCase {
         swapperView = SwapperView()
         swapperViewConfig = SwapperViewConfig()
         swapperViewConfig.transitionAnimationDuration = TestConfig.defaultAnimationDuration
-        SwapperView.defaultConfig.transitionAnimationDuration = TestConfig.defaultAnimationDuration
+        SwapperViewConfig.shared.transitionAnimationDuration = TestConfig.defaultAnimationDuration
 
         UIApplication.shared.keyWindow!.addSubview(swapperView) // Must set this to make animations work.
     }
@@ -41,12 +41,12 @@ class SwapperViewTests: XCTestCase {
             return config
         }
 
-        SwapperView.defaultConfig.transitionAnimationDuration = defaultAnimationDuration
+        SwapperViewConfig.shared.transitionAnimationDuration = defaultAnimationDuration
         swapperView.config = instanceConfig
 
-        let otherInstanceSwapperView = SwapperView()
+        let otherInstanceSwapperView = SwapperView<String>()
 
-        XCTAssertEqual(SwapperView.defaultConfig.transitionAnimationDuration, defaultAnimationDuration)
+        XCTAssertEqual(SwapperViewConfig.shared.transitionAnimationDuration, defaultAnimationDuration)
         XCTAssertEqual(swapperView.config.transitionAnimationDuration, instanceConfigAnimationDuration)
 
         XCTAssertEqual(otherInstanceSwapperView.config.transitionAnimationDuration, defaultAnimationDuration)

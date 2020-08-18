@@ -42,8 +42,8 @@ Replace `version-here` with: [![Version](https://img.shields.io/cocoapods/v/Swap
 * Create an instance of `SwapperView` in your `UIViewController`. You can do this with Storyboard by adding a `UIView` to Storyboard and setting the `UIView` class to `SwapperView`, or create an instance in your Swift code:
 
 ```swift
-let swapperView: SwapperView = {
-    let view = SwapperView()
+let swapperView: SwapperView<ViewControllerSwapViews> = {
+    let view = SwapperView<ViewControllerSwapViews>()
     view.translatesAutoresizingMaskIntoConstraints = false
     view.backgroundColor = .white
     return view
@@ -57,20 +57,27 @@ In your `UIViewController`, add your `UIView`s to your `SwapperView`:
 ```swift
 import Swapper
 
-// It's recommended to use emum over strings. It will prevent bugs by not worrying about typos. 
-enum ViewControllerSwapViews: String {
+// It's recommended to use emum for the identifier. It will prevent bugs by not worrying about typos. 
+// However, you can just as easily use `SwapperView<String>` or something similar. 
+enum ViewControllerSwapViews: String, CustomStringConvertible {
     case imageView
     case tableView
+
+    var description: String {
+        return rawValue
+    }
 }
 
 class ViewController: UIViewController {
+
+    let swapperView = SwapperView<ViewControllerSwapViews>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         swapperView.setSwappingViews([
-            (ViewControllerSwapViews.imageView.rawValue, myImageView),
-            (ViewControllerSwapViews.tableView.rawValue, myTableView)
+            (.imageView, myImageView),
+            (.tableView, myTableView)
         ])
     }
 
@@ -84,7 +91,7 @@ class ViewController: UIViewController {
 * Lastly, all you need to do is to tell Swapper to swap!
 
 ```swift
-try! swapperView.swapTo(ViewControllerSwapViews.tableView.rawValue)
+try! swapperView.swapTo(.tableView)
 ```
 
 Swapper will now show the `UITableView` for you. Swapper will even fade out the `UIImageView` and fade in the `UITbleView` for you for a nice touch 👌. If you want to override the default animation, you can override the behavior yourself:

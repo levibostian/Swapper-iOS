@@ -4,10 +4,11 @@ import UIKit
 /// Views that are swappable with `SwapperView`
 public typealias SwappableView = UIView
 
+/// Identifier for views you want to swap to.
+public typealias SwapperViewIdentifier = Hashable & CustomStringConvertible
+
 /// View that is able to swap between 1+ child views.
-public class SwapperView: UIView {
-    /// Access to `SwapperViewConfig` to set defaults on all instances of `SwapperView`.
-    public static let defaultConfig: SwapperViewConfig = SwapperViewConfig.shared
+public class SwapperView<ViewID: SwapperViewIdentifier>: UIView {
     /// Override `defaultConfig` for this once instance.
     public var config: SwapperViewConfig = SwapperViewConfig.shared {
         didSet {
@@ -32,7 +33,7 @@ public class SwapperView: UIView {
     private func configView() {}
 
     /// Remove all of the previous swapping views and set new ones.
-    public func setSwappingViews(_ newSwappingViews: [(String, SwappableView)]) {
+    public func setSwappingViews(_ newSwappingViews: [(ViewID, SwappableView)]) {
         thread.assertIsMain()
 
         removeAllSubviews() // Since we are changing the views, it's ok if we instantly change up what screen is shown. No need for animation.
@@ -47,11 +48,11 @@ public class SwapperView: UIView {
     }
 
     /// Reference the currently shown view, if it's set.
-    public private(set) var currentView: (String, SwapperWeakView)?
+    public private(set) var currentView: (ViewID, SwapperWeakView)?
 
     /// All of the views that have been added to this `SwapperView`.
     /// - Note: See `self.setSwappingViews()` to set this.
-    public private(set) var swappingViews: [String: SwapperWeakView] = [:]
+    public private(set) var swappingViews: [ViewID: SwapperWeakView] = [:]
 
     /// Remove the old view that was shown before and show the new view to the screen.
     ///
@@ -62,7 +63,7 @@ public class SwapperView: UIView {
     /// - Parameter onComplete: Optional parameter to tell you when the swap animation is complete and the new view is shown.
     /// - Throws: `SwapperError.viewToSwapToNotAdded` If the `viewIndicator` is not found in `self.swappingViews`.
     /// - Throws: `SwapperError.viewToSwapToNoLongerExists` If the `viewIndicator` no longer exists. Probably garbage collected.
-    public func swapTo(_ viewIndicator: String, animate: Bool = true, onComplete: (() -> Void)?) throws {
+    public func swapTo(_ viewIndicator: ViewID, animate: Bool = true, onComplete: (() -> Void)?) throws {
         thread.assertIsMain()
 
         if currentView?.0 == viewIndicator { // the view to swap to is already being shown. Ignore.
@@ -70,10 +71,10 @@ public class SwapperView: UIView {
         }
 
         guard let weakViewToSwapTo = self.swappingViews[viewIndicator] else {
-            throw SwapperError.viewToSwapToNotAdded(viewIndicator: viewIndicator)
+            throw SwapperError.viewToSwapToNotAdded(viewIndicator: viewIndicator.description)
         }
         guard let viewToSwapTo = weakViewToSwapTo.value else {
-            throw SwapperError.viewToSwapToNoLongerExists(viewIndicator: viewIndicator)
+            throw SwapperError.viewToSwapToNoLongerExists(viewIndicator: viewIndicator.description)
         }
 
         func setupConstraints(on view: UIView) {

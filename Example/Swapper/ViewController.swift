@@ -1,16 +1,20 @@
 import Swapper
 import UIKit
 
-enum ViewControllerSwapViews: String {
+enum ViewControllerSwapViews: String, CustomStringConvertible {
     case mtMcKinley
     case littleHill
+    
+    var description: String {
+        return rawValue
+    }
 }
 
 class ViewController: UIViewController {
     private var didSetupConstraints = false
 
-    let swapperView: SwapperView = {
-        let view = SwapperView()
+    let swapperView: SwapperView<ViewControllerSwapViews> = {
+        let view = SwapperView<ViewControllerSwapViews>()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.accessibilityIdentifier = AccessibilityIdentifiers.swapperView
         return view
@@ -67,9 +71,10 @@ class ViewController: UIViewController {
 
     private func setupViews() {
         swapperView.setSwappingViews([
-            (ViewControllerSwapViews.mtMcKinley.rawValue, mtMcKinleyImageView),
-            (ViewControllerSwapViews.littleHill.rawValue, littleHillImageView)
+            (.mtMcKinley, mtMcKinleyImageView),
+            (.littleHill, littleHillImageView)
         ])
+        try! swapperView.swapTo(.mtMcKinley, onComplete: nil)
 
         swapButton.addTarget(self, action: #selector(swapButtonPressed), for: .touchUpInside)
     }
@@ -77,14 +82,14 @@ class ViewController: UIViewController {
     @objc func swapButtonPressed() {
         var nextSwap: ViewControllerSwapViews
 
-        switch ViewControllerSwapViews(rawValue: swapperView.currentView!.0)! {
+        switch swapperView.currentView!.0 {
         case .mtMcKinley:
             nextSwap = .littleHill
         case .littleHill:
             nextSwap = .mtMcKinley
         }
 
-        try! swapperView.swapTo(nextSwap.rawValue, onComplete: nil)
+        try! swapperView.swapTo(nextSwap, onComplete: nil)
     }
 
     override func updateViewConstraints() {
