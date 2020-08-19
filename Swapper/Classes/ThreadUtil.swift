@@ -8,11 +8,11 @@ internal protocol ThreadUtil {
 
 internal class SwapperThreadUtil: ThreadUtil {
     var isMain: Bool {
-        return Thread.isMainThread
+        Thread.isMainThread
     }
 
     var isBackground: Bool {
-        return !isMain
+        !isMain
     }
 
     func assertIsMain() {

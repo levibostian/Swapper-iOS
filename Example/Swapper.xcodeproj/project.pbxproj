@@ -235,6 +235,7 @@
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
 				9DABA6216F3EAA87CB679534 /* [CP] Embed Pods Frameworks */,
+				F7C14B2924ED6B7D0074D03B /* swiftlint */,
 			);
 			buildRules = (
 			);
@@ -419,6 +420,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Swapper_Example/Pods-Swapper_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		F7C14B2924ED6B7D0074D03B /* swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = swiftlint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint --config ../.swiftlint.yml --strict\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n  exit 1\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

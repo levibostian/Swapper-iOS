@@ -75,10 +75,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // `setSwappingViews` will remove all subviews from the SwapperView. Reset it. 
         swapperView.setSwappingViews([
             (.imageView, myImageView),
             (.tableView, myTableView)
-        ])
+        ], swapTo: .imageView) // `swapTo` is optional and is used to swap to one of the views after setting new swapping views. 
     }
 
 }
@@ -155,6 +156,8 @@ Swapper is a pretty simple CocoaPods library project. Follow the directions belo
 $> bundle install
 $> cd Swapper/Example
 $> pod install
+$> brew install swiftformat
+$> brew install swiftlint
 ```
 
 * Setup git hooks to run misc tasks for you when using git. 

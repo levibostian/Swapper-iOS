@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1030"
+   LastUpgradeVersion = "1160"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -41,10 +41,18 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "607FACCF1AFB9204008FA782"
+            BuildableName = "Swapper_Example.app"
+            BlueprintName = "Swapper_Example"
+            ReferencedContainer = "container:Swapper.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <Testables>
          <TestableReference
             skipped = "NO"
-            parallelizable = "YES"
             testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
@@ -56,7 +64,6 @@
          </TestableReference>
          <TestableReference
             skipped = "NO"
-            parallelizable = "YES"
             testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
@@ -67,17 +74,6 @@
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "Swapper_Example.app"
-            BlueprintName = "Swapper_Example"
-            ReferencedContainer = "container:Swapper.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -99,8 +95,6 @@
             ReferencedContainer = "container:Swapper.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

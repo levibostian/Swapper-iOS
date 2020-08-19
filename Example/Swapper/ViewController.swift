@@ -6,7 +6,7 @@ enum ViewControllerSwapViews: String, CustomStringConvertible {
     case littleHill
 
     var description: String {
-        return rawValue
+        rawValue
     }
 }
 
@@ -73,8 +73,7 @@ class ViewController: UIViewController {
         swapperView.setSwappingViews([
             (.mtMcKinley, mtMcKinleyImageView),
             (.littleHill, littleHillImageView)
-        ])
-        try! swapperView.swapTo(.mtMcKinley, onComplete: nil)
+        ], swapTo: .mtMcKinley)
 
         swapButton.addTarget(self, action: #selector(swapButtonPressed), for: .touchUpInside)
     }

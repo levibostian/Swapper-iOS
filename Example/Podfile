@@ -4,12 +4,8 @@ platform :ios, "10.0"
 
 target 'Swapper_Example' do
   pod 'Swapper', :path => '../'  
-  pod 'SwiftLint'
-  pod 'SwiftFormat/CLI'
 
   target 'Swapper_Tests' do
-    inherit! :search_paths
-
-    
+    inherit! :search_paths    
   end
 end
