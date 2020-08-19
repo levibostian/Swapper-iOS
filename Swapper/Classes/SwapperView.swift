@@ -35,8 +35,8 @@ public class SwapperView<ViewID: SwapperViewIdentifier>: UIView {
     /// Remove all of the previous swapping views and set new ones.
     public func setSwappingViews(_ newSwappingViews: [(ViewID, SwappableView)], swapTo: ViewID?) {
         thread.assertIsMain()
-        
-        let isFirstTimeCalling = self.currentView == nil
+
+        let isFirstTimeCalling = currentView == nil
 
         removeAllSubviews() // Since we are changing the views, it's ok if we instantly change up what screen is shown. No need for animation.
         currentView = nil
@@ -47,10 +47,10 @@ public class SwapperView<ViewID: SwapperViewIdentifier>: UIView {
 
             swappingViews[newSwappingViewPair.0] = SwapperWeakView(newSwappingView)
         }
-        
+
         if let swapTo = swapTo, self.swappingViews[swapTo] != nil {
             let animate = !isFirstTimeCalling // we only want to not animate when you first call this.
-            
+
             try! self.swapTo(swapTo, animate: animate, onComplete: nil)
         }
     }
@@ -95,8 +95,8 @@ public class SwapperView<ViewID: SwapperViewIdentifier>: UIView {
             view.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
             view.updateConstraints()
         }
-        
-        let isFirstViewToShow = self.currentView == nil
+
+        let isFirstViewToShow = currentView == nil
 
         // Set currentView now, because even though it's not the current view until after the animation is done, we rely on this variable in other places so change now as it's the intended currentView.
         currentView = (viewIndicator, weakViewToSwapTo)

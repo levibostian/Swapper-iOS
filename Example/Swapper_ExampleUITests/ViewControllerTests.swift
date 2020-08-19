@@ -40,19 +40,19 @@ class ViewControllerPageObject {
     let app: XCUIApplication
 
     var swapperView: XCUIElement {
-        return app.otherElements[AccessibilityIdentifiers.swapperView]
+        app.otherElements[AccessibilityIdentifiers.swapperView]
     }
 
     var swapButton: XCUIElement {
-        return app.buttons[AccessibilityIdentifiers.swapButton]
+        app.buttons[AccessibilityIdentifiers.swapButton]
     }
 
     var mcKinleyImage: XCUIElement! {
-        return app.images[AccessibilityIdentifiers.mcKinleyImage]
+        app.images[AccessibilityIdentifiers.mcKinleyImage]
     }
 
     var littleHillImage: XCUIElement! {
-        return app.images[AccessibilityIdentifiers.littleHillImage]
+        app.images[AccessibilityIdentifiers.littleHillImage]
     }
 
     init(app: XCUIApplication) {

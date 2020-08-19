@@ -6,7 +6,7 @@ enum ViewControllerSwapViews: String, CustomStringConvertible {
     case littleHill
 
     var description: String {
-        return rawValue
+        rawValue
     }
 }
 
