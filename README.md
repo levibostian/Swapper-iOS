@@ -75,10 +75,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // `setSwappingViews` will remove all subviews from the SwapperView. Reset it. 
         swapperView.setSwappingViews([
             (.imageView, myImageView),
             (.tableView, myTableView)
-        ])
+        ], swapTo: .imageView) // `swapTo` is optional and is used to swap to one of the views after setting new swapping views. 
     }
 
 }

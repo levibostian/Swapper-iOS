@@ -63,9 +63,8 @@ class SwapperViewTests: XCTestCase {
         }
         swapperView.config = swapperViewConfig
 
-        swapperView.setSwappingViews(swappingViews)
+        swapperView.setSwappingViews(swappingViews, swapTo: swappingViews[0].0)
 
-        try! swapperView.swapTo(swappingViews[0].0, onComplete: nil)
         try! swapperView.swapTo(swappingViews[1].0, onComplete: nil)
 
         wait(for: [expectAnimatorToBeCalled], timeout: TestConfig.defaultWait)
@@ -77,7 +76,7 @@ class SwapperViewTests: XCTestCase {
         ]
 
         XCTAssertEqual(threadUtil.mock_assertIsMain_calls, 0)
-        swapperView.setSwappingViews(swappingViews)
+        swapperView.setSwappingViews(swappingViews, swapTo: nil)
         XCTAssertGreaterThan(threadUtil.mock_assertIsMain_calls, 0)
     }
 
@@ -86,7 +85,7 @@ class SwapperViewTests: XCTestCase {
             ("1", UIView())
         ]
 
-        swapperView.setSwappingViews(swappingViews)
+        swapperView.setSwappingViews(swappingViews, swapTo: nil)
         let numberCallsAssertMain = threadUtil.mock_assertIsMain_calls
 
         try! swapperView.swapTo(swappingViews[0].0) {
@@ -105,9 +104,7 @@ class SwapperViewTests: XCTestCase {
         }
         swapperView.config = swapperViewConfig
 
-        swapperView.setSwappingViews(swappingViews)
-
-        try! swapperView.swapTo(swappingViews[0].0, onComplete: nil)
+        swapperView.setSwappingViews(swappingViews, swapTo: swappingViews[0].0)
         try! swapperView.swapTo(swappingViews[1].0, onComplete: nil)
 
         wait(for: [expectAnimatorToBeCalled], timeout: TestConfig.defaultWait)
@@ -133,7 +130,7 @@ class SwapperViewTests: XCTestCase {
         }
         swapperView.config = swapperViewConfig
 
-        swapperView.setSwappingViews(swappingViews)
+        swapperView.setSwappingViews(swappingViews, swapTo: nil)
 
         try! swapperView.swapTo(swappingViews[1].0, onComplete: {
             expectOnComplete.fulfill()
@@ -162,7 +159,7 @@ class SwapperViewTests: XCTestCase {
         }
         swapperView.config = swapperViewConfig
 
-        swapperView.setSwappingViews(swappingViews)
+        swapperView.setSwappingViews(swappingViews, swapTo: nil)
 
         try! swapperView.swapTo(swappingViews[1].0, onComplete: {
             expectOnComplete.fulfill()
@@ -182,9 +179,8 @@ class SwapperViewTests: XCTestCase {
         }
         swapperView.config = swapperViewConfig
 
-        swapperView.setSwappingViews(swappingViews)
+        swapperView.setSwappingViews(swappingViews, swapTo: swappingViews[0].0)
 
-        try! swapperView.swapTo(swappingViews[0].0, onComplete: nil)
         try! swapperView.swapTo(swappingViews[1].0, onComplete: nil)
 
         wait(for: [expectAnimatorToBeCalled], timeout: TestConfig.defaultWait)
@@ -201,7 +197,7 @@ class SwapperViewTests: XCTestCase {
             ("2", UIButton())
         ]
 
-        swapperView.setSwappingViews(swappingViews)
+        swapperView.setSwappingViews(swappingViews, swapTo: nil)
 
         XCTAssertNil(swapperView.currentView)
     }
@@ -213,7 +209,7 @@ class SwapperViewTests: XCTestCase {
             ("2", UIButton())
         ]
 
-        swapperView.setSwappingViews(swappingViews)
+        swapperView.setSwappingViews(swappingViews, swapTo: nil)
         try! swapperView.swapTo(swappingViews[1].0) {
             XCTAssertEqual(self.swapperView.currentView!.0, swappingViews[1].0)
             XCTAssertEqual(self.swapperView.subviews[0], swappingViews[1].1)
@@ -236,7 +232,7 @@ class SwapperViewTests: XCTestCase {
         }
         swapperView.config = swapperViewConfig
 
-        swapperView.setSwappingViews(swappingViews)
+        swapperView.setSwappingViews(swappingViews, swapTo: nil)
         try! swapperView.swapTo(swappingViews[0].0) {
             XCTAssertEqual(self.swapperView.currentView!.0, swappingViews[0].0)
             XCTAssertEqual(self.swapperView.subviews[0], swappingViews[0].1)
@@ -257,9 +253,9 @@ class SwapperViewTests: XCTestCase {
             ("4", UIView())
         ]
 
-        swapperView.setSwappingViews(swappingViews)
+        swapperView.setSwappingViews(swappingViews, swapTo: nil)
         try! swapperView.swapTo(swappingViews[1].0) {
-            self.swapperView.setSwappingViews(newSetSwappingViews)
+            self.swapperView.setSwappingViews(newSetSwappingViews, swapTo: nil)
 
             XCTAssertNil(self.swapperView.currentView) // should be nil as we just set new swapping views
 
@@ -275,8 +271,8 @@ class SwapperViewTests: XCTestCase {
             ("2", UIView())
         ]
 
-        swapperView.setSwappingViews(swappingViews)
-        swapperView.setSwappingViews([])
+        swapperView.setSwappingViews(swappingViews, swapTo: nil)
+        swapperView.setSwappingViews([], swapTo: nil)
 
         XCTAssertNil(swapperView.currentView)
         XCTAssertTrue(swapperView.subviews.isEmpty)
@@ -289,7 +285,7 @@ class SwapperViewTests: XCTestCase {
     func test_swapTo_throwsIfViewGone() {
         var view: UIView? = UIView()
 
-        swapperView.setSwappingViews([("1", view!)])
+        swapperView.setSwappingViews([("1", view!)], swapTo: nil)
 
         view = nil
 
@@ -306,7 +302,7 @@ class SwapperViewTests: XCTestCase {
         let longAnimationDuration = 1.0
 
         swapperViewConfig.transitionAnimationDuration = longAnimationDuration
-        swapperView.setSwappingViews(swappingViews)
+        swapperView.setSwappingViews(swappingViews, swapTo: nil)
 
         try! swapperView.swapTo(swappingViews[1].0) {
             expectLongAnimationOnCompleteToBeCalled.fulfill()
